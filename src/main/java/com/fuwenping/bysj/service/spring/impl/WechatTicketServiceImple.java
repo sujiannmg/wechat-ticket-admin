@@ -16,7 +16,7 @@ import java.util.Collection;
  * @author 付文萍
  * @version 0.0.1-RELEASE
  */
-@org.springframework.stereotype.Service("WechatTicketServic")
+@org.springframework.stereotype.Service("WechatTicketService")
 @org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.REQUIRES_NEW, readOnly = true, rollbackFor = java.lang.Exception.class)
 public class WechatTicketServiceImple implements IWechatTicketService {
 

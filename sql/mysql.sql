@@ -13,12 +13,11 @@ ACCOUNT                              varchar(32)             character set utf8 
 PASSWORD                             char(32)                character set utf8 collate utf8_bin    not null comment '系统密码',
 DESCRIPTION                          varchar(255)            character set utf8 collate utf8_bin        null comment '系统描述',
 
-VERSION                                                                                             not null comment '业务版本',
-CREATE_TIME                                                                                             null comment '创建时间',
+VERSION                              int                                                                null comment '业务版本',
+CREATE_TIME                          varchar(16)             character set utf8 collate utf8_bin        null comment '创建时间',
 CREATE_USER_NAME                     varchar(32)             character set utf8 collate utf8_bin        null comment '创建账号',
-MODIFY_TIME                                                                                             null comment '修改时间',
+MODIFY_TIME                          varchar(16)             character set utf8 collate utf8_bin        null comment '修改时间',
 MODIFY_USER_NAME                     varchar(32)             character set utf8 collate utf8_bin        null comment '修改账号',
-
 primary key(ACCOUNT_ID)
 )ENGINE=INNODB DEFAULT CHARSET=utf8 comment '系统帐号';
 

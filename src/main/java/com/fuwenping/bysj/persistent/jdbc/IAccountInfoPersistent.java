@@ -4,7 +4,6 @@ package com.fuwenping.bysj.persistent.jdbc;
 import com.fuwenping.bysj.commons.exception.WechatTicketException;
 import com.fuwenping.bysj.entity.AccountInfo;
 
-import javax.xml.ws.WebServiceException;
 import java.util.Collection;
 
 /**

@@ -25,7 +25,8 @@
   <![endif]-->
 
   <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -34,24 +35,22 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">登录开始您的会话</p>
 
-    <form action="../../index2.html" method="post">
+    <form action="/login" method="post" id="login-form">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        <input type="text" class="form-control" name="account" onfocus="clearPrompt()" placeholder="用户名">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" class="form-control" name="password" onfocus="clearPrompt()" placeholder="密码">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Remember Me
-            </label>
-          </div>
+        <div class="col-xs-8" id ="prompt">
+          <#if error ??>
+            <button type="button" class="btn btn-danger" disabled="disabled">${error!}</button>
+          </#if>
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
@@ -88,14 +87,46 @@
 <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="../../plugins/iCheck/icheck.min.js"></script>
+<!-- bootstrap-validator-->
+<script src="/../../plugins/bootstrap-validator/bootstrap-validator.min.js"></script>
+
 <script>
   $(function () {
     $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
+      checkboxClass: 'icheckbox_square-red',
+      radioClass: 'iradio_square-red',
       increaseArea: '20%' // optional
     });
+    var prompt= document.getElementById("prompt");
+    console.log(prompt)
+    $("#login-form").bootstrapValidator({
+      message: '请输入用户名/密码',
+      submitHandler: function (valiadtor, loginForm, submitButton) {
+        rememberMe($("input[name='rememberMe']").is(":checked"));
+        valiadtor.defaultSubmit();
+      },
+      fields: {
+        account: {
+          validators: {
+            notEmpty: {
+              message: '登录用户名不能为空'
+            }
+          }
+        },
+        password: {
+          validators: {
+            notEmpty: {
+              message: '密码不能为空'
+            }
+          }
+        }
+      }
+    });
   });
+  function clearPrompt(){
+    var prompt= document.getElementById("prompt");
+    prompt.innerHTML = "";
+  }
 </script>
 </body>
 </html>

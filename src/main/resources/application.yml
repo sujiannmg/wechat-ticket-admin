@@ -1,9 +1,9 @@
 spring:
   dataSource:
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:mysql://39.107.100.75:3306/bysj?useUnicode=yes&amp
     username: root
     password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driverClassName: com.mysql.cj.jdbc.Driver
 
     max-idle: 10
     max-wait: 10000

@@ -74,7 +74,7 @@ public class AccountInfoPersistentImpl extends BasePersistentImpl implements IAc
     try {
       // 得到随机的UUID
       accountInfo.setAccountId(UUID.randomUUID().toString());
-      accountInfo.setVersion("1l");
+      accountInfo.setVersion(1l);
       this.namedParameterJdbcTemplate.update(INSERT_SQL.toString(), new BeanPropertySqlParameterSource(accountInfo));
     } catch (Exception e) {
       String errorMessage = "创建账号失败：数据库操作错误";

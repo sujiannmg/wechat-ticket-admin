@@ -13,17 +13,17 @@ public abstract class BaseEntity implements java.io.Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  protected String version; // 业务版本
+  protected Long version; // 业务版本
   protected String createTime; // 创建时间
   protected String createUsername; // 创建账号
   protected String modifyTime; // 修改时间
   protected String modifyUsername; // 修改账号
 
-  public String getVersion() {
+  public Long getVersion() {
     return version;
   }
 
-  public void setVersion(String version) {
+  public void setVersion(Long version) {
     this.version = version;
   }
 

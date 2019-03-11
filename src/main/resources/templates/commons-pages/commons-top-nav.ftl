@@ -1,3 +1,10 @@
+<!-- Logo -->
+<a href="index2.html" class="logo">
+  <!-- mini logo for sidebar mini 50x50 pixels -->
+  <span class="logo-mini"><b>微</b>票</span>
+  <!-- logo for regular state and mobile devices -->
+  <span class="logo-lg"><b>微</b>票</span>
+</a>
 <nav class="navbar navbar-static-top" role="navigation">
   <!-- Sidebar toggle button-->
   <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">

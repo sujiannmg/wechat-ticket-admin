@@ -9,7 +9,11 @@
         <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>Alexander Pierce</p>
+        <p>
+          <#if Session.AUTHORIZE_ACCOUNT_SESSION_KEY ?? >
+            ${Session.AUTHORIZE_ACCOUNT_SESSION_KEY.getAccount()!}
+          </#if>
+        </p>
         <!-- Status -->
         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
       </div>
@@ -31,7 +35,30 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">HEADER</li>
       <!-- Optionally, you can add icons to the links -->
-      <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
+      <li <#if (activeMenu ?? && "starter" == activeMenu ) > class="active" </#if> >
+        <a href="${webContextPath!}/starter">
+          <i class="fa fa-home"></i>
+          首页
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-asterisk"></i>
+          <span>基础数据管理</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li <#if (activeMenu ?? && "base/account" == activeMenu ) > class="active" </#if>>
+            <a href="${webContextPath!}/base/account">
+              <i class="fa fa-circle-o"></i>
+              帐号管理
+            </a>
+          </li>
+          <li><a href="#">Link in level 2</a></li>
+        </ul>
+      </li>
       <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
       <li class="treeview">
         <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
