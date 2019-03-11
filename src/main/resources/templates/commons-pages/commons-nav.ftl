@@ -41,7 +41,7 @@
           首页
         </a>
       </li>
-      <li>
+      <li class="treeview" <#if (activeMenu ?? && activeMenu?indexOf("base/") > -1 ) > class="active" </#if>>
         <a href="#">
           <i class="fa fa-asterisk"></i>
           <span>基础数据管理</span>
