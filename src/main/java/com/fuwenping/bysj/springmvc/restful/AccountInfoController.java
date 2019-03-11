@@ -38,5 +38,13 @@ public class AccountInfoController extends BaseController {
     return view;
   }
 
+  // 设置页面路径
+  @Override
+  protected ModelAndView getView(String viewName, WechatTicketException wechatTicketException) {
+    ModelAndView view = super.getView(viewName, wechatTicketException);
+    view.addObject(ACTIVE_MENU_KEY, "base/account");
+    return view;
+  }
+
 
 }
