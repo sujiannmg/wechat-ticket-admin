@@ -14,7 +14,7 @@ public class AccountInfo extends BaseEntity {
   protected String accountId; // 系统帐号编号
   protected String account; // 系统帐号
   protected String password; // 系统密码
-  protected String description; // 系统描述
+  protected String description; // 账号描述
 
   public String getAccountId() {
     return accountId;

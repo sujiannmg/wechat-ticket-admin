@@ -97,8 +97,6 @@
       radioClass: 'iradio_square-red',
       increaseArea: '20%' // optional
     });
-    var prompt= document.getElementById("prompt");
-    console.log(prompt)
     $("#login-form").bootstrapValidator({
       message: '请输入用户名/密码',
       submitHandler: function (valiadtor, loginForm, submitButton) {

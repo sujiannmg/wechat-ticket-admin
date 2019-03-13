@@ -6,7 +6,7 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel">
       <div class="pull-left image">
-        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        <img src="${webContextPath!}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
         <p>
@@ -15,7 +15,7 @@
           </#if>
         </p>
         <!-- Status -->
-        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
       </div>
     </div>
 
@@ -38,10 +38,17 @@
       <li <#if (activeMenu ?? && "starter" == activeMenu ) > class="active" </#if> >
         <a href="${webContextPath!}/starter">
           <i class="fa fa-home"></i>
-          首页
+          <span>首页</span>
         </a>
       </li>
-      <li class="treeview" <#if (activeMenu ?? && activeMenu?indexOf("base/") > -1 ) > class="active" </#if>>
+      <li <#if (activeMenu ?? && "account" == activeMenu ) > class="active" </#if> >
+        <a href="${webContextPath!}/account">
+          <i class="fa fa-user"></i>
+          <span>帐号管理</span>
+        </a>
+      </li>
+      <!--
+      <li class="treeview" <#if (activeMenu ?? && "account" == activeMenu ) > class="active" </#if>>
         <a href="#">
           <i class="fa fa-asterisk"></i>
           <span>基础数据管理</span>
@@ -50,8 +57,8 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li <#if (activeMenu ?? && "base/account" == activeMenu ) > class="active" </#if>>
-            <a href="${webContextPath!}/base/account">
+          <li>
+            <a href="${webContextPath!}/account">
               <i class="fa fa-circle-o"></i>
               帐号管理
             </a>
@@ -59,6 +66,7 @@
           <li><a href="#">Link in level 2</a></li>
         </ul>
       </li>
+      -->
       <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
       <li class="treeview">
         <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>

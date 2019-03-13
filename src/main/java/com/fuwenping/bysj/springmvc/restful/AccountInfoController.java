@@ -5,7 +5,9 @@ import com.fuwenping.bysj.entity.AccountInfo;
 import com.fuwenping.bysj.service.spring.IWechatTicketService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
@@ -17,7 +19,7 @@ import java.util.Collection;
  * @version 0.0.-RELEASE
  */
 @org.springframework.stereotype.Controller
-@RequestMapping("/base/account")
+@RequestMapping("/account")
 public class AccountInfoController extends BaseController {
 
   private static final Log log = LogFactory.getLog(AccountInfoController.class);
@@ -38,11 +40,49 @@ public class AccountInfoController extends BaseController {
     return view;
   }
 
+  // 编辑页面
+  @RequestMapping(value = { "edit/{accountId}" }, method = RequestMethod.GET)
+  public ModelAndView edit(@PathVariable String accountId) {
+    ModelAndView view = this.getView("accountInfo/AccountInfoEdit", null);
+    try {
+      if (accountId != null) {
+        AccountInfo accountInfo = wechatTicketService.getAccountInfoByPrimaryKey(accountId);
+        view.addObject("accountInfo", accountInfo);
+      }
+    } catch (WechatTicketException e) {
+      view = this.getView("accountInfo/AccountInfoGrid", e);
+    }
+    return view;
+  }
+
+  @RequestMapping(value = { "edit", "create" }, method = RequestMethod.GET)
+  public ModelAndView edit() {
+    return edit(null);
+  }
+
+  // 新增账号页面
+  @RequestMapping(value = { "edit" }, method = RequestMethod.POST)
+  public ModelAndView save(AccountInfo accountInfo) {
+    try {
+      if (accountInfo.getAccountId() != null && accountInfo.getAccountId().trim().length() > 0) {
+        wechatTicketService.updateAccountInfo(accountInfo);
+      } else {
+        wechatTicketService.saveAccountInfo(accountInfo);
+      }
+      return grid(null);
+    } catch (WechatTicketException e) {
+      ModelAndView view = this.getView("accountInfo/AccountInfoEdit", e);
+      view.addObject("accountInfo", accountInfo);
+      return view;
+    }
+  }
+
   // 设置页面路径
   @Override
   protected ModelAndView getView(String viewName, WechatTicketException wechatTicketException) {
     ModelAndView view = super.getView(viewName, wechatTicketException);
-    view.addObject(ACTIVE_MENU_KEY, "base/account");
+    view.addObject(ACTIVE_MENU_KEY, "account");
+    System.out.println("account-----------" + view);
     return view;
   }
 
