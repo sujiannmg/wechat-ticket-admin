@@ -34,7 +34,7 @@
                   <strong>程序运行异常：</strong> ${error!}
                 </div>
               </#if>
-              <form id="accountEditForm" method="POST" action="${webContextPath!}/api/base/account/edit" class="form-horizontal dss-base-form">
+              <form id="accountEditForm" method="POST" action="${webContextPath!}/account/edit" class="form-horizontal dss-base-form">
                 <input type="hidden" name="accountId" <#if account ??>value="${account.getAccountId()!}"</#if> >
                 <input type="hidden" name="version" <#if account ??>value="${account.getVersion()!}"</#if>>
                 <div class="form-group"><label class="col-sm-2 control-label">系统帐号</label>

@@ -41,7 +41,7 @@ public class AuthorizedInterceptor implements HandlerInterceptor {
       if (url.indexOf("/login") > -1) {
         return true;
       } else {
-        request.getRequestDispatcher("/api/login").forward(request, response);
+        request.getRequestDispatcher("/login").forward(request, response);
       }
     }
     // 返回 true表示不拦截即放行
