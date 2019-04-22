@@ -35,23 +35,23 @@
                 </div>
               </#if>
               <form id="accountEditForm" method="POST" action="${webContextPath!}/account/edit" class="form-horizontal dss-base-form">
-                <input type="hidden" name="accountId" <#if account ??>value="${account.getAccountId()!}"</#if> >
-                <input type="hidden" name="version" <#if account ??>value="${account.getVersion()!}"</#if>>
+                <input type="hidden" name="accountId" <#if accountInfo ??>value="${accountInfo.getAccountId()!}"</#if> >
+                <input type="hidden" name="version" <#if accountInfo ??>value="${accountInfo.getVersion()!}"</#if>>
                 <div class="form-group"><label class="col-sm-2 control-label">系统帐号</label>
                   <div class="col-sm-8">
-                    <input type="text" name="account"  class="form-control" <#if account ??>value="${account.getAccount()!}"</#if>>
+                    <input type="text" name="account"  class="form-control" <#if accountInfo ??>value="${accountInfo.getAccount()!}"</#if>>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">系统密码</label>
                   <div class="col-sm-8">
-                    <input type="password" name="password"  class="form-control" <#if account ??>value="${account.getPassword()!}"</#if>>
+                    <input type="password" name="password"  class="form-control" <#if accountInfo ??>value="${accountInfo.getPassword()!}"</#if>>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">账号描述</label>
                   <div class="col-sm-8">
-                    <input type="text" name="name"  class="form-control" <#if account ??>value="${account.getName()!}"</#if>>
+                    <input type="text" name="description"  class="form-control" <#if accountInfo ??>value="${accountInfo.getDescription()!}"</#if>>
                   </div>
                 </div>
                 <div class="form-group">

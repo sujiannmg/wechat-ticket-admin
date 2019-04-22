@@ -14,10 +14,10 @@ PASSWORD                             char(32)                character set utf8 
 DESCRIPTION                          varchar(255)            character set utf8 collate utf8_bin        null comment '系统描述',
 
 VERSION                              int                                                                null comment '业务版本',
-CREATE_TIME                          varchar(16)             character set utf8 collate utf8_bin        null comment '创建时间',
-CREATE_USER_NAME                     varchar(32)             character set utf8 collate utf8_bin        null comment '创建账号',
-MODIFY_TIME                          varchar(16)             character set utf8 collate utf8_bin        null comment '修改时间',
-MODIFY_USER_NAME                     varchar(32)             character set utf8 collate utf8_bin        null comment '修改账号',
+CREATE_TIME                          varchar(32)             character set utf8 collate utf8_bin        null comment '创建时间',
+CREATE_USERNAME                      varchar(32)             character set utf8 collate utf8_bin        null comment '创建账号',
+MODIFY_TIME                          varchar(32)             character set utf8 collate utf8_bin        null comment '修改时间',
+MODIFY_USERNAME                      varchar(32)             character set utf8 collate utf8_bin        null comment '修改账号',
 primary key(ACCOUNT_ID)
 )ENGINE=INNODB DEFAULT CHARSET=utf8 comment '系统帐号';
 

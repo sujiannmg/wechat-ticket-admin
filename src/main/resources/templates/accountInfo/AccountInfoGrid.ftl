@@ -51,9 +51,31 @@
                     <td>${account.getCreateTime()!}</td>
                     <td>${account.getModifyTime()!}</td>
                     <td>
-                      <a class="btn btn-xs btn-primary" href="${webContextPath!}/api/base/account/view/${account.getAccountId()!}">详情</a>
-                      <a class="btn btn-xs btn-primary" href="${webContextPath!}/api/base/account/edit/${account.getAccountId()!}">修改</a>
+                      <a class="btn btn-xs btn-primary" href="${webContextPath!}/account/view/${account.getAccountId()!}">详情</a>
+                      <a class="btn btn-xs btn-primary" href="${webContextPath!}/account/edit/${account.getAccountId()!}">修改</a>
                       <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteAccount${account.getAccountId()!}">删 除</button>
+                      <div class="modal fade" id="deleteAccount${account.getAccountId()!}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                              <h5 class="modal-title" id="myModalLabel">确认删除</h5>
+                            </div>
+                            <div class="modal-body">
+                              <p class="text-danger">请注意！请注意！请注意！</p>
+                              <p class="text-info">确认删除该系统帐号 <strong style="color: red"> ${account.getAccount()!} </strong> 吗？</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-sm btn-primary pull-left" data-dismiss="modal">取 消</button>
+                              <!--<button type="button" class="btn btn-primary">Save changes</button> -->
+                              <a class="btn btn-sm btn-danger" id="deleteButton" data-loading-text="删除中..." href="${webContextPath!}/account/delete/${account.getAccountId()!}">继续删除</a>
+                            </div>
+                          </div>
+                          <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                      </div>
                     </td>
                   </tr>
                 </#list>

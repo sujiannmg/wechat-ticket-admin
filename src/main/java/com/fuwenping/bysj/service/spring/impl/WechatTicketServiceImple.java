@@ -35,7 +35,7 @@ public class WechatTicketServiceImple implements IWechatTicketService {
       AccountInfo queryAccountInfo = new AccountInfo();
       queryAccountInfo.setAccount(accountInfo.getAccount());
       Collection<AccountInfo> accountInfoList = accountInfoPersistent.getAccountInfoByObject(queryAccountInfo);
-      if (accountInfoList.isEmpty()) {
+      if (!accountInfoList.isEmpty()) {
         throw new WechatTicketException("创建账号失败：帐号[" + accountInfo.getAccount() + "]已经存在");
       }
       accountInfoPersistent.saveAccountInfo(accountInfo);
@@ -88,6 +88,7 @@ public class WechatTicketServiceImple implements IWechatTicketService {
   }
 
   @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
   public void removeAccountInfo(AccountInfo accountInfo) throws WechatTicketException {
     if (log.isDebugEnabled()) {
       log.debug("Staring call WechatTicketServic.removeAccountInfo ,parameters : [ accountInfo  =  " + accountInfo + "]");
@@ -105,6 +106,7 @@ public class WechatTicketServiceImple implements IWechatTicketService {
   }
 
   @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
   public AccountInfo getAccountInfoByPrimaryKey(String accountId) throws WechatTicketException {
     if (log.isDebugEnabled()) {
       log.debug("Staring call WechatTicketServic.getAccountInfoByPrimaryKey ,parameters : [ accountInfo  =  " + accountId + "]");
@@ -122,6 +124,7 @@ public class WechatTicketServiceImple implements IWechatTicketService {
   }
 
   @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
   public Collection<AccountInfo> getAccountInfoByObject(AccountInfo accountInfo) throws WechatTicketException {
     if (log.isDebugEnabled()) {
       log.debug("Staring call WechatTicketServic.getAccountInfoByObject ,parameters : [ accountInfo  =  " + accountInfo + "]");

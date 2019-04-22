@@ -31,13 +31,7 @@ public abstract class BaseEntity implements java.io.Serializable {
     return createTime;
   }
 
-  public String displayCreateTime() {
-    if(createTime != null) {
-      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //设置日期格式
-      return simpleDateFormat.format(new Date());
-    }
-    return "";
-  }
+  public void setCreateTime(String createTime) { this.createTime = createTime; }
 
   public String getCreateUsername() {
     return createUsername;
@@ -51,13 +45,7 @@ public abstract class BaseEntity implements java.io.Serializable {
     return modifyTime;
   }
 
-  public String displayModifyTime() {
-    if(modifyTime != null) {
-      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //设置日期格式
-      return simpleDateFormat.format(new Date());
-    }
-    return "";
-  }
+  public void setModifyTime(String modifyTime) { this.modifyTime = modifyTime; }
 
   public String getModifyUsername() {
     return modifyUsername;

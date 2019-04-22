@@ -31,8 +31,8 @@
             <h4 class="control-sidebar-subheading">
               Custom Template Design
               <span class="pull-right-container">
-                    <span class="label label-danger pull-right">70%</span>
-                  </span>
+                <span class="label label-danger pull-right">70%</span>
+              </span>
             </h4>
 
             <div class="progress progress-xxs">

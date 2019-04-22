@@ -77,12 +77,39 @@ public class AccountInfoController extends BaseController {
     }
   }
 
+  // 显示详情
+  @RequestMapping(value = { "view/{accountId}" }, method = RequestMethod.GET)
+  public ModelAndView view(@PathVariable String accountId) {
+    ModelAndView view = this.getView("accountInfo/AccountDisplay", null);
+    try {
+      if (accountId != null) {
+        AccountInfo accountInfo = wechatTicketService.getAccountInfoByPrimaryKey(accountId);
+        view.addObject("accountInfo", accountInfo);
+      }
+    } catch (WechatTicketException e) {
+      view = this.getView("accountInfo/AccountDisplay", e);
+    }
+    return view;
+  }
+
+  // 删除单个数据
+  @RequestMapping(value = "delete/{accountId}", method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE })
+  public ModelAndView delete(@PathVariable String accountId) {
+    try {
+      AccountInfo accountInfo = new AccountInfo();
+      accountInfo.setAccountId(accountId);
+      wechatTicketService.removeAccountInfo(accountInfo);
+      return grid(null);
+    } catch (WechatTicketException e) {
+      return this.getView("accountInfo/AccountInfoGrid", e);
+    }
+  }
+
   // 设置页面路径
   @Override
   protected ModelAndView getView(String viewName, WechatTicketException wechatTicketException) {
     ModelAndView view = super.getView(viewName, wechatTicketException);
-    view.addObject(ACTIVE_MENU_KEY, "account");
-    System.out.println("account-----------" + view);
+    view.addObject(ACTIVE_MENU_KEY, "accountInfo");
     return view;
   }
 

@@ -9,10 +9,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 该类是完成对数据库表WCT_ACCOUNT_INFO的持久化实现，包括对该表的增、删、改、查等基本操作的的具休实现。
@@ -48,6 +46,7 @@ public class AccountInfoPersistentImpl extends BasePersistentImpl implements IAc
     COLUMNS.add(COLUMN_ACCOUNT);
     COLUMNS.add(COLUMN_PASSWORD);
     COLUMNS.add(COLUMN_DESCRIPTION);
+    COLUMNS.addAll(BASE_COLUMNS);
 
     PRIMARY_KEY.add(COLUMN_ACCOUNT_ID);
 
@@ -75,7 +74,10 @@ public class AccountInfoPersistentImpl extends BasePersistentImpl implements IAc
       // 得到随机的UUID
       accountInfo.setAccountId(UUID.randomUUID().toString());
       accountInfo.setVersion(1l);
+      accountInfo.setCreateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+      // accountInfo.setModifyTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
       this.namedParameterJdbcTemplate.update(INSERT_SQL.toString(), new BeanPropertySqlParameterSource(accountInfo));
+      System.out.println("-------------" + INSERT_SQL.toString() + "--------------");
     } catch (Exception e) {
       String errorMessage = "创建账号失败：数据库操作错误";
       log.error(errorMessage, e);
@@ -89,6 +91,7 @@ public class AccountInfoPersistentImpl extends BasePersistentImpl implements IAc
       log.debug("Staring call AccountInfoPersistent.updateAccountInfo ,parameters : [ accountInfo  =  \" + accountInfo + \"]");
     }
     try {
+        accountInfo.setModifyTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         this.namedParameterJdbcTemplate.update(UPDATE_SQL.toString(), new BeanPropertySqlParameterSource(accountInfo));
     } catch (Exception e) {
       String errorMessage = "修改账号失败：数据库操作错误";
@@ -119,9 +122,10 @@ public class AccountInfoPersistentImpl extends BasePersistentImpl implements IAc
     }
     try {
       StringBuilder sql = new StringBuilder(SELECT_BASE_SQL);
-      sql.append("AND").append(COLUMN_ACCOUNT_ID).append(" = :").append(COLUMNS_PARAMETER.get(COLUMN_ACCOUNT_ID));
+      sql.append("AND ").append(COLUMN_ACCOUNT_ID).append(" = :").append(COLUMNS_PARAMETER.get(COLUMN_ACCOUNT_ID));
       MapSqlParameterSource paramSource = new MapSqlParameterSource();
       paramSource.addValue("accountId", accountId);
+      System.out.println("***********" + sql.toString() + "*********");
       Collection<AccountInfo> accountList = this.namedParameterJdbcTemplate.query(sql.toString(), paramSource, BeanPropertyRowMapper.newInstance(AccountInfo.class));
       return (accountList != null && !accountList.isEmpty() && accountList.size() > 0) ? accountList.iterator().next() : null;
     } catch (Exception e) {

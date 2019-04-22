@@ -14,7 +14,7 @@ import java.util.Set;
  * @author 付文萍
  * @version 0.0.1-RELEASE
  */
-public class BasePersistentImpl {
+public abstract class BasePersistentImpl {
 
   // 声明NamedParameterJdbcTemplate
   protected NamedParameterJdbcTemplate namedParameterJdbcTemplate;
