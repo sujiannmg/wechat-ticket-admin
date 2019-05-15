@@ -31,6 +31,7 @@ public class MovieInterfaceWeappController extends BaseController {
 
   @RequestMapping(value = { "cominglist" }, method = RequestMethod.GET)
   public String getMovieCominglist() {
+    // TODO 按照正常的controller进行传参，解决思路
     try {
       // 保存请求结果
       String saveResult = null;
@@ -44,7 +45,7 @@ public class MovieInterfaceWeappController extends BaseController {
         // 电影接口编号
         movieInterfaceInfo.setMovieInterfaceId(UUID.randomUUID().toString());
         // 电影接口名称
-        movieInterfaceInfo.setMovieInterfaceName("即将上映电影列表" + i++ + "列");
+        movieInterfaceInfo.setMovieInterfaceName("即将上映电影列表-" + UUID.randomUUID().toString());
         // 电影接口类型
         movieInterfaceInfo.setMovieInterfaceType("GET请求");
         // 电影接口地址
