@@ -96,7 +96,7 @@ public class MovieInterfaceInfoPersistentIml extends BasePersistentImpl implemen
     }
     try {
       // 得到随机的UUID
-      // movieInterfaceInfo.setMovieInterfaceId(UUID.randomUUID().toString());
+      movieInterfaceInfo.setMovieInterfaceId(UUID.randomUUID().toString());
       movieInterfaceInfo.setVersion(1l);
       movieInterfaceInfo.setCreateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
       this.namedParameterJdbcTemplate.update(INSERT_SQL.toString(), new BeanPropertySqlParameterSource(movieInterfaceInfo));
