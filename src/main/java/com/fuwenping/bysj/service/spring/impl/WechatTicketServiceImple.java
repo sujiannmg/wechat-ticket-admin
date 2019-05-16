@@ -203,6 +203,7 @@ public class WechatTicketServiceImple implements IWechatTicketService {
       movieInterfaceInfo.setVersion(movieInterfaceInfo.getVersion() + 1);
       movieInterfaceInfoPersistent.updateMovieInterfaceInfo(movieInterfaceInfo);
     } catch (WechatTicketException e) {
+      // e.printStackTrace();
       log.error(e.getMessage(), e);
       throw e;
     } catch (Exception e) {

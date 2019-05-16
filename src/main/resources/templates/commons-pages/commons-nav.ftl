@@ -48,6 +48,20 @@
         </a>
       </li>
       <!--
+      <li <#if (activeMenu ?? && "11" == activeMenu ) > class="active" </#if> >
+        <a href="${webContextPath!}/account">
+          <i class="fa fa-user"></i>
+          <span>微信用户管理</span>
+        </a>
+      </li>
+      -->
+      <li <#if (activeMenu ?? && "movieinterface" == activeMenu ) > class="active" </#if> >
+        <a href="${webContextPath!}/movieinterface">
+          <i class="fa fa-file-movie-o"></i>
+          <span>电影接口信息管理</span>
+        </a>
+      </li>
+      <!--
       <li class="treeview" <#if (activeMenu ?? && "account" == activeMenu ) > class="active" </#if>>
         <a href="#">
           <i class="fa fa-asterisk"></i>
