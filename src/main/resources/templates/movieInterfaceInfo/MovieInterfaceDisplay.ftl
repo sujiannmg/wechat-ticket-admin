@@ -16,7 +16,7 @@
     <!-- Content Header (Page header) -->
     <ol class="breadcrumb" style="margin-bottom: 0px">
       <li><a href="${webContextPath!}/starter"><i class="fa fa-dashboard"></i> 首页</a></li>
-      <li><a href="${webContextPath!}/movieinterface"><i class="fa fa-file-movie-o"></i> 账号管理</a></li>
+      <li><a href="${webContextPath!}/movieinterface"><i class="fa fa-file-movie-o"></i> 电影接口信息管理</a></li>
       <li class="active"><i class="fa fa-list-alt"></i> 电影接口信息详情</li>
     </ol>
     <!-- Main content -->

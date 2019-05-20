@@ -31,7 +31,7 @@
             <div class="box-body">
               <a class="btn btn-sm btn-success disabled " style="width: 130px" href="${webContextPath!}/movieinterface/create"><i class="fa fa-plus"></i>增加电影接口信息</a>
               <!-- <button type="button" data-toggle="tooltip" data-original-title="点击修改" class="btn btn-info btn-xs" onclick="">修改</button> -->
-              <table id="example2" class="table table-bordered table-striped">
+              <table id="example2" class="table table-bordered table-striped display nowrap ">
                 <thead>
                 <tr>
                   <th>接口名称</th>
@@ -90,12 +90,13 @@
                 </#list>
                 </#if>
                 </tbody>
+                <!--
                 <tfoot>
                 <tr>
                   <th>接口名称</th>
                   <th>接口类型</th>
-                  <th>接口地址</th>
-                  <th>接口参数</th>
+                  <th width="95">接口地址</th>
+                  <th width="95">接口参数</th>
                   <th>接口编码</th>
                   <th>响应状态</th>
                   <th>调用次数</th>
@@ -104,6 +105,7 @@
                   <th width="95">操作</th>
                 </tr>
                 </tfoot>
+                -->
               </table>
             </div>
             <!-- /.box-body -->
@@ -137,7 +139,9 @@
       'searching'   : false,
       'ordering'    : true,
       'info'        : true,
-      'autoWidth'   : false
+      'autoWidth'   : false,
+      // "scrollY": 320, //表格页面的长度
+      "scrollX": true   //是否支持滚动
     })
   })
 </script>
