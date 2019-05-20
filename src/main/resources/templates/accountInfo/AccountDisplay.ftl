@@ -17,7 +17,7 @@
     <ol class="breadcrumb" style="margin-bottom: 0px">
       <li><a href="${webContextPath!}/starter"><i class="fa fa-dashboard"></i> 首页</a></li>
       <li><a href="${webContextPath!}/account"><i class="fa fa-user"></i> 账号管理</a></li>
-      <li class="active"><i class="fa fa-edit"></i> 账号详情</li>
+      <li class="active"><i class="fa fa-list-alt"></i> 账号详情</li>
     </ol>
     <!-- Main content -->
     <section class="content">

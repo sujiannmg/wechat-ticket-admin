@@ -73,7 +73,7 @@
                             </div>
                             <div class="modal-body">
                               <p class="text-danger">请注意！请注意！请注意！</p>
-                              <p class="text-info">确认删除该系统帐号 <strong style="color: red"> ${movieInterfaceInfo.getMovieInterfaceName()!} </strong> 吗？</p>
+                              <p class="text-info">确认删除该接口名称 <strong style="color: red"> ${movieInterfaceInfo.getMovieInterfaceName()!} </strong> 吗？</p>
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-sm btn-primary pull-left" data-dismiss="modal">取 消</button>

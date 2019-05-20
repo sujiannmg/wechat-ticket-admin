@@ -109,7 +109,7 @@ public class AccountInfoController extends BaseController {
   @Override
   protected ModelAndView getView(String viewName, WechatTicketException wechatTicketException) {
     ModelAndView view = super.getView(viewName, wechatTicketException);
-    view.addObject(ACTIVE_MENU_KEY, "accountInfo");
+    view.addObject(ACTIVE_MENU_KEY, "account");
     return view;
   }
 

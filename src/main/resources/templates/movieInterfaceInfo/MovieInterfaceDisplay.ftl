@@ -16,8 +16,8 @@
     <!-- Content Header (Page header) -->
     <ol class="breadcrumb" style="margin-bottom: 0px">
       <li><a href="${webContextPath!}/starter"><i class="fa fa-dashboard"></i> 首页</a></li>
-      <li><a href="${webContextPath!}/account"><i class="fa fa-user"></i> 账号管理</a></li>
-      <li class="active"><i class="fa fa-edit"></i> 账号详情</li>
+      <li><a href="${webContextPath!}/movieinterface"><i class="fa fa-file-movie-o"></i> 账号管理</a></li>
+      <li class="active"><i class="fa fa-list-alt"></i> 电影接口信息详情</li>
     </ol>
     <!-- Main content -->
     <section class="content">
@@ -25,7 +25,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">详细帐号信息</h3>
+              <h3 class="box-title">详细电影接口信息</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -34,58 +34,106 @@
                   <strong>程序运行异常：</strong> ${error!}
                 </div>
               </#if>
-              <form id="accountEditForm" method="POST" action="${webContextPath!}/account/edit/" class="form-horizontal dss-base-form">
-                <div class="form-group"><label class="col-sm-2 control-label">帐号编号</label>
+              <form id="accountEditForm" method="POST" action="${webContextPath!}/movieInterfaceInfo/edit/" class="form-horizontal dss-base-form">
+                <div class="form-group"><label class="col-sm-2 control-label">电影接口编号</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if accountInfo ??> ${accountInfo.getAccountId()!}</#if> </label>
+                    <label class="form-control"> <#if movieInterfaceInfo ??> ${movieInterfaceInfo.getMovieInterfaceId()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
-                <div class="form-group"><label class="col-sm-2 control-label">帐号</label>
+                <div class="form-group"><label class="col-sm-2 control-label">电影接口名称</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if accountInfo ??> ${accountInfo.getAccount()!}</#if> </label>
+                    <label class="form-control"> <#if movieInterfaceInfo ??> ${movieInterfaceInfo.getMovieInterfaceName()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
-                <div class="form-group"><label class="col-sm-2 control-label">系统描述</label>
+                <div class="form-group"><label class="col-sm-2 control-label">电影接口类型</label>
                   <div class="col-sm-8">
-                    <label class="form-control">  <#if accountInfo ??> ${accountInfo.getDescription()!}</#if> </label>
+                    <label class="form-control"> <#if movieInterfaceInfo ??> ${movieInterfaceInfo.getMovieInterfaceType()!}</#if> </label>
+                  </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group"><label class="col-sm-2 control-label">电影接口地址</label>
+                  <div class="col-sm-8">
+                    <label class="form-control"> <#if movieInterfaceInfo ??> ${movieInterfaceInfo.getMovieInterfaceUrl()!}</#if> </label>
+                  </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group"><label class="col-sm-2 control-label">电影接口参数</label>
+                  <div class="col-sm-8">
+                    <label class="form-control"> <#if movieInterfaceInfo ??> ${movieInterfaceInfo.getMovieInterfacePaprm()!}</#if> </label>
+                  </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group"><label class="col-sm-2 control-label">电影接口编码</label>
+                  <div class="col-sm-8">
+                    <label class="form-control"> <#if movieInterfaceInfo ??> ${movieInterfaceInfo.getMovieInterfaceAscii()!}</#if> </label>
+                  </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group"><label class="col-sm-2 control-label">接口响应状态</label>
+                  <div class="col-sm-8">
+                    <label class="form-control"> <#if movieInterfaceInfo ??> ${movieInterfaceInfo.getMovieInterfaceCode()!}</#if> </label>
+                  </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group"><label class="col-sm-2 control-label">响应内容长度</label>
+                  <div class="col-sm-8">
+                    <label class="form-control"> <#if movieInterfaceInfo ??> ${movieInterfaceInfo.getMovieReponseLength()!}</#if> </label>
+                  </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group"><label class="col-sm-2 control-label">接口响应内容</label>
+                  <div class="col-sm-8">
+                    <label class="form-control"> <#if movieInterfaceInfo ??> ${movieInterfaceInfo.getMovieinterfaceContent()!}</#if> </label>
+                  </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group"><label class="col-sm-2 control-label">调用接口次数</label>
+                  <div class="col-sm-8">
+                    <label class="form-control"> <#if movieInterfaceInfo ??> ${movieInterfaceInfo.getMovieReponseNum()!}</#if> </label>
+                  </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group"><label class="col-sm-2 control-label">调用接口时间</label>
+                  <div class="col-sm-8">
+                    <label class="form-control">  <#if movieInterfaceInfo ??> ${movieInterfaceInfo.getMovieReponseTime()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">业务版本号</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if accountInfo ??> ${accountInfo.getVersion()!}</#if> </label>
+                    <label class="form-control"> <#if movieInterfaceInfo ??> ${movieInterfaceInfo.getVersion()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">创建用户</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if accountInfo ??> ${accountInfo.getCreateUsername()!}</#if> </label>
+                    <label class="form-control"> <#if movieInterfaceInfo ??> ${movieInterfaceInfo.getCreateUsername()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">创建时间</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if accountInfo ??> ${accountInfo.getCreateTime()!}</#if> </label>
+                    <label class="form-control"> <#if movieInterfaceInfo ??> ${movieInterfaceInfo.getCreateTime()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">最后修改用户</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if accountInfo ??> ${accountInfo.getModifyUsername()!}</#if> </label>
+                    <label class="form-control"> <#if movieInterfaceInfo ??> ${movieInterfaceInfo.getModifyUsername()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">最后修改时间</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if accountInfo ??> ${accountInfo.getModifyTime()!}</#if> </label>
+                    <label class="form-control"> <#if movieInterfaceInfo ??> ${movieInterfaceInfo.getModifyTime()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group">
                   <div class="col-sm-2 col-sm-offset-10">
-                    <a class="btn btn-sm btn-primary" href="${webContextPath!}/account/">返回</a>
+                    <a class="btn btn-sm btn-primary" href="${webContextPath!}/movieinterface/">返回</a>
                   </div>
                 </div>
               </form>
