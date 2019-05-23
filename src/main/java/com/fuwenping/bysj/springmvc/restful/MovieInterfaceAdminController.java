@@ -1,7 +1,6 @@
 package com.fuwenping.bysj.springmvc.restful;
 
 import com.fuwenping.bysj.commons.exception.WechatTicketException;
-import com.fuwenping.bysj.entity.AccountInfo;
 import com.fuwenping.bysj.entity.MovieInterfaceInfo;
 import com.fuwenping.bysj.service.spring.IWechatTicketService;
 import org.apache.commons.logging.Log;
@@ -23,7 +22,7 @@ import java.util.Collection;
 @RequestMapping("/movieinterface")
 public class MovieInterfaceAdminController extends BaseController {
 
-  private static final Log log = LogFactory.getLog(AccountInfoController.class);
+  private static final Log log = LogFactory.getLog(MovieInterfaceAdminController.class);
 
   @javax.annotation.Resource(name = "WechatTicketService")
   private IWechatTicketService wechatTicketService;

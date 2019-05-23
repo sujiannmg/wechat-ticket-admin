@@ -61,6 +61,12 @@
           <span>电影接口信息管理</span>
         </a>
       </li>
+      <li <#if (activeMenu ?? && "cinemainterface" == activeMenu ) > class="active" </#if> >
+        <a href="${webContextPath!}/cinemainterface">
+          <i class="fa fa-film"></i>
+          <span>影院接口信息管理</span>
+        </a>
+      </li>
       <!--
       <li class="treeview" <#if (activeMenu ?? && "account" == activeMenu ) > class="active" </#if>>
         <a href="#">

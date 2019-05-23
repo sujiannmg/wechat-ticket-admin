@@ -50,8 +50,8 @@ create table WCT_MOVIE_INTERFACE_INFO(
 MOVIE_INTERFACE_ID                   char(36)                character set utf8 collate utf8_bin    not null comment '电影接口编号',
 MOVIE_INTERFACE_NAME                 varchar(128)            character set utf8 collate utf8_bin    not null comment '电影接口名称',
 MOVIE_INTERFACE_TYPE                 varchar(16)             character set utf8 collate utf8_bin    not null comment '电影接口类型',
-MOVIE_INTERFACE_URL                  varchar(128)            character set utf8 collate utf8_bin    not null comment '电影接口地址',
-MOVIE_INTERFACE_PAPRM                varchar(8)              character set utf8 collate utf8_bin        null comment '电影接口参数', --有--无
+MOVIE_INTERFACE_URL                  varchar(255)            character set utf8 collate utf8_bin    not null comment '电影接口地址',
+MOVIE_INTERFACE_PAPRM                varchar(1288)              character set utf8 collate utf8_bin        null comment '电影接口参数', --有--无
 MOVIE_INTERFACE_ASCII                varchar(8)              character set utf8 collate utf8_bin        null comment '电影接口编码', --UTF-8
 MOVIE_INTERFACE_CODE                 int                                                                null comment '接口响应状态',
 MOVIE_REPONSE_LENGTH                 int                                                                null comment '响应内容长度',
@@ -76,8 +76,8 @@ create table WCT_CINEMA_INTERFACE_INFO(
 CINEMA_INTERFACE_ID                  char(36)                character set utf8 collate utf8_bin    not null comment '影院接口编号',
 CINEMA_INTERFACE_NAME                varchar(128)            character set utf8 collate utf8_bin    not null comment '影院接口名称',
 CINEMA_INTERFACE_TYPE                varchar(16)             character set utf8 collate utf8_bin    not null comment '影院接口类型',
-CINEMA_INTERFACE_URL                 varchar(128)            character set utf8 collate utf8_bin    not null comment '影院接口地址',
-CINEMA_INTERFACE_PAPRM               varchar(8)              character set utf8 collate utf8_bin        null comment '影院接口参数', --有--无
+CINEMA_INTERFACE_URL                 varchar(255)            character set utf8 collate utf8_bin    not null comment '影院接口地址',
+CINEMA_INTERFACE_PAPRM               varchar(128)              character set utf8 collate utf8_bin        null comment '影院接口参数', --有--无
 CINEMA_INTERFACE_ASCII               varchar(8)              character set utf8 collate utf8_bin        null comment '影院接口编码', --UTF-8
 CINEMA_INTERFACE_CODE                int                                                                null comment '接口响应状态',
 CINEMA_REPONSE_LENGTH                int                                                                null comment '响应内容长度',
@@ -102,8 +102,8 @@ create table WCT_COMMENT_INTERFACE_INFO
 COMMENT_INTERFACE_ID                 char(36)                character set utf8 collate utf8_bin    not null comment '影评接口编号',
 COMMENT_INTERFACE_NAME               varchar(128)            character set utf8 collate utf8_bin    not null comment '影评接口名称',
 COMMENT_INTERFACE_TYPE               varchar(16)             character set utf8 collate utf8_bin    not null comment '影评接口类型',
-COMMENT_INTERFACE_URL                varchar(128)            character set utf8 collate utf8_bin    not null comment '影评接口地址',
-COMMENT_INTERFACE_PAPRM              varchar(8)              character set utf8 collate utf8_bin        null comment '影评接口参数', --有--无
+COMMENT_INTERFACE_URL                varchar(255)            character set utf8 collate utf8_bin    not null comment '影评接口地址',
+COMMENT_INTERFACE_PAPRM              varchar(128)              character set utf8 collate utf8_bin        null comment '影评接口参数', --有--无
 COMMENT_INTERFACE_ASCII              varchar(8)              character set utf8 collate utf8_bin        null comment '影评接口编码', --UTF-8
 COMMENT_INTERFACE_CODE               int                                                                null comment '接口响应状态',
 COMMENT_REPONSE_LENGTH               int                                                                null comment '响应内容长度',

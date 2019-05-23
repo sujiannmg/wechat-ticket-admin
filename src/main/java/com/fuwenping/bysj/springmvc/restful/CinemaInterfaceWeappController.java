@@ -2,6 +2,7 @@ package com.fuwenping.bysj.springmvc.restful;
 
 import com.fuwenping.bysj.commons.exception.WechatTicketException;
 import com.fuwenping.bysj.commons.util.HttpClientUtil;
+import com.fuwenping.bysj.entity.CinemaInterfaceInfo;
 import com.fuwenping.bysj.entity.MovieInterfaceInfo;
 import com.fuwenping.bysj.service.spring.IWechatTicketService;
 import org.apache.commons.logging.Log;
@@ -21,76 +22,75 @@ import java.util.Date;
  * @version 0.0.-RELEASE
  */
 @RestController // 该类注入有别于@Controller
-@RequestMapping("/movieinterface")
-public class MovieInterfaceWeappController extends BaseController {
+@RequestMapping("/cinemainterface")
+public class CinemaInterfaceWeappController extends BaseController {
 
-  private static final Log log = LogFactory.getLog(MovieInterfaceWeappController.class);
+  private static final Log log = LogFactory.getLog(CinemaInterfaceWeappController.class);
 
   @javax.annotation.Resource(name = "WechatTicketService")
   private IWechatTicketService wechatTicketService;
 
   // 电影即将上映接口
-  @RequestMapping(value = { "cominglist" }, method = RequestMethod.GET)
-  public String getMovieCominglist() {
-    // TODO 按照正常的controller进行传参，解决思路
+  @RequestMapping(value = { "filtercinemas" }, method = RequestMethod.GET)
+  public String getCinemaFilterCinemas() {
     try {
       // 保存请求结果
       String saveResult = null;
       // 初始化请求
       HttpClientUtil httpClientUtil = new HttpClientUtil();
-      MovieInterfaceInfo movieInterfaceInfo = new MovieInterfaceInfo();
+      CinemaInterfaceInfo cinemaInterfaceInfo = new CinemaInterfaceInfo();
       // 通过主键查询到第一次增加的数据对象
-      MovieInterfaceInfo oldMovieInterfaceInfo = wechatTicketService.getMovieInterfaceInfoByPrimaryKey("ae795551-360e-4f6b-bfe5-5b09d4687be4");
+      CinemaInterfaceInfo oldCinemaInterfaceInfo = wechatTicketService.getCinemaInterfaceInfoByPrimaryKey("c831b672-4090-494d-b647-7200f9bce5d0");
       // 获取接口数据
-      saveResult = httpClientUtil.httpGet("https://m.maoyan.com/ajax/comingList?token=&limit=10");
-      if(!oldMovieInterfaceInfo.getMovieInterfaceId().equals(null)) {
+      saveResult = httpClientUtil.httpGet("https://m.maoyan.com/ajax/filterCinemas");
+      if(!oldCinemaInterfaceInfo.getCinemaInterfaceId().equals(null)) {
         // 电影接口编号
-        movieInterfaceInfo.setMovieInterfaceId("ae795551-360e-4f6b-bfe5-5b09d4687be4");
+        cinemaInterfaceInfo.setCinemaInterfaceId("c831b672-4090-494d-b647-7200f9bce5d0");
         // 电影接口名称
-        movieInterfaceInfo.setMovieInterfaceName("即将上映电影列表");
+        cinemaInterfaceInfo.setCinemaInterfaceName("搜索影院列表");
         // 电影接口类型
-        movieInterfaceInfo.setMovieInterfaceType("GET请求");
+        cinemaInterfaceInfo.setCinemaInterfaceType("GET请求");
         // 电影接口地址
-        movieInterfaceInfo.setMovieInterfaceUrl("https://m.maoyan.com/ajax/comingList?token=&limit=10");
+        cinemaInterfaceInfo.setCinemaInterfaceUrl("https://m.maoyan.com/ajax/filterCinemas");
         // 电影接口参数
-        movieInterfaceInfo.setMovieInterfacePaprm("无参数");
+        cinemaInterfaceInfo.setCinemaInterfacePaprm("无参数");
         // 电影接口编码
-        movieInterfaceInfo.setMovieInterfaceAscii("UTF-8");
+        cinemaInterfaceInfo.setCinemaInterfaceAscii("UTF-8");
         // 接口响应状态
-        movieInterfaceInfo.setMovieInterfaceCode(200);
+        cinemaInterfaceInfo.setCinemaInterfaceCode(200);
         // 响应内容长度
-        movieInterfaceInfo.setMovieReponseLength(-1);
+        cinemaInterfaceInfo.setCinemaReponseLength(-1);
         // 业务版本
-        movieInterfaceInfo.setVersion(oldMovieInterfaceInfo.getVersion());
+        cinemaInterfaceInfo.setVersion(oldCinemaInterfaceInfo.getVersion());
         // 接口响应内容
-        movieInterfaceInfo.setMovieinterfaceContent(saveResult);
+        cinemaInterfaceInfo.setCinemaInterfaceContent(saveResult);
         // 调用接口次数
-        movieInterfaceInfo.setMovieReponseNum(oldMovieInterfaceInfo.getMovieReponseNum() + 1); // 查出原来数据+1操作。使用标志判断
+        cinemaInterfaceInfo.setCinemaReponseNum(oldCinemaInterfaceInfo.getCinemaReponseNum() + 1);
         // 调用接口时间
-        movieInterfaceInfo.setMovieReponseTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-        wechatTicketService.updateMovieInterfaceInfo(movieInterfaceInfo);
+        cinemaInterfaceInfo.setCinemaReponseTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        wechatTicketService.updateCinemaInterfaceInfo(cinemaInterfaceInfo);
       } else {
         // 电影接口名称
-        movieInterfaceInfo.setMovieInterfaceName("即将上映电影列表");
+        cinemaInterfaceInfo.setCinemaInterfaceName("搜索影院列表");
         // 电影接口类型
-        movieInterfaceInfo.setMovieInterfaceType("GET请求");
+        cinemaInterfaceInfo.setCinemaInterfaceType("GET请求");
         // 电影接口地址
-        movieInterfaceInfo.setMovieInterfaceUrl("https://m.maoyan.com/ajax/comingList?token=&limit=10");
+        cinemaInterfaceInfo.setCinemaInterfaceUrl("https://m.maoyan.com/ajax/filterCinemas");
         // 电影接口参数
-        movieInterfaceInfo.setMovieInterfacePaprm("无参数");
+        cinemaInterfaceInfo.setCinemaInterfacePaprm("无参数");
         // 电影接口编码
-        movieInterfaceInfo.setMovieInterfaceAscii("UTF-8");
+        cinemaInterfaceInfo.setCinemaInterfaceAscii("UTF-8");
         // 接口响应状态
-        movieInterfaceInfo.setMovieInterfaceCode(200);
+        cinemaInterfaceInfo.setCinemaInterfaceCode(200);
         // 响应内容长度
-        movieInterfaceInfo.setMovieReponseLength(-1);
+        cinemaInterfaceInfo.setCinemaReponseLength(-1);
         // 接口响应内容
-        movieInterfaceInfo.setMovieinterfaceContent(saveResult);
+        cinemaInterfaceInfo.setCinemaInterfaceContent(saveResult);
         // 调用接口次数
-        movieInterfaceInfo.setMovieReponseNum(1);
+        cinemaInterfaceInfo.setCinemaReponseNum(1);
         // 调用接口时间
-        movieInterfaceInfo.setMovieReponseTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-        wechatTicketService.saveMovieInterfaceInfo(movieInterfaceInfo);
+        cinemaInterfaceInfo.setCinemaReponseTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        wechatTicketService.saveCinemaInterfaceInfo(cinemaInterfaceInfo);
       }
       return saveResult;
     } catch (WechatTicketException e) {
