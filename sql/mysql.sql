@@ -31,8 +31,8 @@ NICK_NAME                            varchar(128)            character set utf8 
 GENDER                               char(1)                 character set utf8 collate utf8_bin    not null comment '用户性别',
 CITY                                 varchar(32)             character set utf8 collate utf8_bin    not null comment '用户城市',
 PROVINCE                             varchar(32)             character set utf8 collate utf8_bin    not null comment '用户省会',
-AVATAR_URL                           varchar(255)            character set utf8 collate utf8_bin    not null comment '头像路径',
-UNION_ID                             char(36)                character set utf8 collate utf8_bin    not null comment '统一标识',
+AVATAR_URL                           varchar(255)            character set utf8 collate utf8_bin        null comment '头像路径',
+UNION_ID                             char(36)                character set utf8 collate utf8_bin        null comment '统一标识',
 
 VERSION                              int                                                                null comment '业务版本',
 CREATE_TIME                          varchar(32)             character set utf8 collate utf8_bin        null comment '新建时间',
@@ -51,7 +51,7 @@ MOVIE_INTERFACE_ID                   char(36)                character set utf8 
 MOVIE_INTERFACE_NAME                 varchar(128)            character set utf8 collate utf8_bin    not null comment '电影接口名称',
 MOVIE_INTERFACE_TYPE                 varchar(16)             character set utf8 collate utf8_bin    not null comment '电影接口类型',
 MOVIE_INTERFACE_URL                  varchar(255)            character set utf8 collate utf8_bin    not null comment '电影接口地址',
-MOVIE_INTERFACE_PAPRM                varchar(1288)              character set utf8 collate utf8_bin        null comment '电影接口参数', --有--无
+MOVIE_INTERFACE_PAPRM                varchar(1288)           character set utf8 collate utf8_bin        null comment '电影接口参数', --有--无
 MOVIE_INTERFACE_ASCII                varchar(8)              character set utf8 collate utf8_bin        null comment '电影接口编码', --UTF-8
 MOVIE_INTERFACE_CODE                 int                                                                null comment '接口响应状态',
 MOVIE_REPONSE_LENGTH                 int                                                                null comment '响应内容长度',
@@ -77,7 +77,7 @@ CINEMA_INTERFACE_ID                  char(36)                character set utf8 
 CINEMA_INTERFACE_NAME                varchar(128)            character set utf8 collate utf8_bin    not null comment '影院接口名称',
 CINEMA_INTERFACE_TYPE                varchar(16)             character set utf8 collate utf8_bin    not null comment '影院接口类型',
 CINEMA_INTERFACE_URL                 varchar(255)            character set utf8 collate utf8_bin    not null comment '影院接口地址',
-CINEMA_INTERFACE_PAPRM               varchar(128)              character set utf8 collate utf8_bin        null comment '影院接口参数', --有--无
+CINEMA_INTERFACE_PAPRM               varchar(128)            character set utf8 collate utf8_bin        null comment '影院接口参数', --有--无
 CINEMA_INTERFACE_ASCII               varchar(8)              character set utf8 collate utf8_bin        null comment '影院接口编码', --UTF-8
 CINEMA_INTERFACE_CODE                int                                                                null comment '接口响应状态',
 CINEMA_REPONSE_LENGTH                int                                                                null comment '响应内容长度',
@@ -103,7 +103,7 @@ COMMENT_INTERFACE_ID                 char(36)                character set utf8 
 COMMENT_INTERFACE_NAME               varchar(128)            character set utf8 collate utf8_bin    not null comment '影评接口名称',
 COMMENT_INTERFACE_TYPE               varchar(16)             character set utf8 collate utf8_bin    not null comment '影评接口类型',
 COMMENT_INTERFACE_URL                varchar(255)            character set utf8 collate utf8_bin    not null comment '影评接口地址',
-COMMENT_INTERFACE_PAPRM              varchar(128)              character set utf8 collate utf8_bin        null comment '影评接口参数', --有--无
+COMMENT_INTERFACE_PAPRM              varchar(128)            character set utf8 collate utf8_bin        null comment '影评接口参数', --有--无
 COMMENT_INTERFACE_ASCII              varchar(8)              character set utf8 collate utf8_bin        null comment '影评接口编码', --UTF-8
 COMMENT_INTERFACE_CODE               int                                                                null comment '接口响应状态',
 COMMENT_REPONSE_LENGTH               int                                                                null comment '响应内容长度',
@@ -119,3 +119,31 @@ MODIFY_TIME                          varchar(32)             character set utf8 
 MODIFY_USERNAME                      varchar(32)             character set utf8 collate utf8_bin        null comment '更改账号',
 primary key(CINEMA_INTERFACE_ID)
 )ENGINE=INNODB DEFAULT CHARSET=utf8 comment '影评接口信息';
+
+/*==============================================================*/
+  --  影票订单信息      WCT_TICKET_ORDER_INFO   --
+/*==============================================================*/
+drop table if exists WCT_TICKET_ORDER_INFO;
+create table WCT_TICKET_ORDER_INFO
+TICKET_ORDER_INFO_ID                 char(36)                character set utf8 collate utf8_bin    not null comment '影票订单编号',
+CINEMA_NAME                          varchar(32)             character set utf8 collate utf8_bin    not null comment '影院名称',
+CINEMA_ADDRESS                       varchar(32)             character set utf8 collate utf8_bin    not null comment '影院位置',
+MOVIE_NAME                           varchar(32)             character set utf8 collate utf8_bin    not null comment '影片名称',
+MOVIE_TIME                           varchar(32)             character set utf8 collate utf8_bin    not null comment '影片开始时间',
+MOVIE_LABEL                          varchar(16)             character set utf8 collate utf8_bin    not null comment '影片标签',
+CINEMA_SPECIFIC_ADDRESS              varchar(32)             character set utf8 collate utf8_bin    not null comment '观影具体位置',
+
+MOVIE_ORDER_NUM                      varchar(32)             character set utf8 collate utf8_bin    not null comment '影片订单号',
+USER_PHONE_NUM                       varchar(16              character set utf8 collate utf8_bin    not null comment '用户手机号',
+MOVIE_SERIAL_NUM                     varchar(16)             character set utf8 collate utf8_bin    not null comment '影片流水号',
+MOVIE_ORDER_NUM                      varchar(16)             character set utf8 collate utf8_bin    not null comment '影片订单号',
+ORDER_VERIFICATION_NUM               varchar(16)             character set utf8 collate utf8_bin    not null comment '订单验证码',
+ORDER_SUM_PRICE                      varchar(8)              character set utf8 collate utf8_bin    not null comment '订单总价',
+
+VERSION                              int                                                                null comment '业务版本',
+CREATE_TIME                          varchar(32)             character set utf8 collate utf8_bin        null comment '新建时间',
+CREATE_USERNAME                      varchar(32)             character set utf8 collate utf8_bin        null comment '新建账号',
+MODIFY_TIME                          varchar(32)             character set utf8 collate utf8_bin        null comment '更改时间',
+MODIFY_USERNAME                      varchar(32)             character set utf8 collate utf8_bin        null comment '更改账号',
+primary key(TICKET_ORDER_INFO_ID)
+)ENGINE=INNODB DEFAULT CHARSET=utf8 comment '影票订单信息';
