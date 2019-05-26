@@ -98,7 +98,7 @@ primary key(CINEMA_INTERFACE_ID)
   --  影评接口信息      WCT_COMMENT_INTERFACE_INFO   --
 /*==============================================================*/
 drop table if exists WCT_COMMENT_INTERFACE_INFO;
-create table WCT_COMMENT_INTERFACE_INFO
+create table WCT_COMMENT_INTERFACE_INFO(
 COMMENT_INTERFACE_ID                 char(36)                character set utf8 collate utf8_bin    not null comment '影评接口编号',
 COMMENT_INTERFACE_NAME               varchar(128)            character set utf8 collate utf8_bin    not null comment '影评接口名称',
 COMMENT_INTERFACE_TYPE               varchar(16)             character set utf8 collate utf8_bin    not null comment '影评接口类型',
@@ -124,7 +124,7 @@ primary key(CINEMA_INTERFACE_ID)
   --  影票订单信息      WCT_TICKET_ORDER_INFO   --
 /*==============================================================*/
 drop table if exists WCT_TICKET_ORDER_INFO;
-create table WCT_TICKET_ORDER_INFO
+create table WCT_TICKET_ORDER_INFO(
   TICKET_ORDER_INFO_ID                 char(36)                character set utf8 collate utf8_bin    not null comment '影票订单编号',
   CINEMA_NAME                          varchar(32)             character set utf8 collate utf8_bin    not null comment '影院名称',
   CINEMA_ADDRESS                       varchar(32)             character set utf8 collate utf8_bin    not null comment '影院位置',
