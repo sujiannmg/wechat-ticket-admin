@@ -47,14 +47,12 @@
           <span>帐号管理</span>
         </a>
       </li>
-      <!--
-      <li <#if (activeMenu ?? && "11" == activeMenu ) > class="active" </#if> >
+      <li <#if (activeMenu ?? && "wechat" == activeMenu ) > class="active" </#if> >
         <a href="${webContextPath!}/account">
-          <i class="fa fa-user"></i>
+          <i class="fa fa-wechat"></i>
           <span>微信用户管理</span>
         </a>
       </li>
-      -->
       <li <#if (activeMenu ?? && "movieinterface" == activeMenu ) > class="active" </#if> >
         <a href="${webContextPath!}/movieinterface">
           <i class="fa fa-file-movie-o"></i>
@@ -65,6 +63,18 @@
         <a href="${webContextPath!}/cinemainterface">
           <i class="fa fa-film"></i>
           <span>影院接口信息管理</span>
+        </a>
+      </li>
+      <li <#if (activeMenu ?? && "comment" == activeMenu ) > class="active" </#if> >
+        <a href="${webContextPath!}/cinemainterface">
+          <i class="fa fa-commenting-o"></i>
+          <span>影评接口信息管理</span>
+        </a>
+      </li>
+      <li <#if (activeMenu ?? && "ticket" == activeMenu ) > class="active" </#if> >
+        <a href="${webContextPath!}/cinemainterface">
+          <i class="fa fa-ticket"></i>
+          <span>影票订单信息管理</span>
         </a>
       </li>
       <!--
@@ -86,7 +96,7 @@
           <li><a href="#">Link in level 2</a></li>
         </ul>
       </li>
-      -->
+
       <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
       <li class="treeview">
         <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
@@ -99,6 +109,7 @@
           <li><a href="#">Link in level 2</a></li>
         </ul>
       </li>
+      -->
     </ul>
     <!-- /.sidebar-menu -->
   </section>
