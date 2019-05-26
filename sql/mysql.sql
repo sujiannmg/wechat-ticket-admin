@@ -125,25 +125,28 @@ primary key(CINEMA_INTERFACE_ID)
 /*==============================================================*/
 drop table if exists WCT_TICKET_ORDER_INFO;
 create table WCT_TICKET_ORDER_INFO
-TICKET_ORDER_INFO_ID                 char(36)                character set utf8 collate utf8_bin    not null comment '影票订单编号',
-CINEMA_NAME                          varchar(32)             character set utf8 collate utf8_bin    not null comment '影院名称',
-CINEMA_ADDRESS                       varchar(32)             character set utf8 collate utf8_bin    not null comment '影院位置',
-MOVIE_NAME                           varchar(32)             character set utf8 collate utf8_bin    not null comment '影片名称',
-MOVIE_TIME                           varchar(32)             character set utf8 collate utf8_bin    not null comment '影片开始时间',
-MOVIE_LABEL                          varchar(16)             character set utf8 collate utf8_bin    not null comment '影片标签',
-CINEMA_SPECIFIC_ADDRESS              varchar(32)             character set utf8 collate utf8_bin    not null comment '观影具体位置',
+  TICKET_ORDER_INFO_ID                 char(36)                character set utf8 collate utf8_bin    not null comment '影票订单编号',
+  CINEMA_NAME                          varchar(32)             character set utf8 collate utf8_bin    not null comment '影院名称',
+  CINEMA_ADDRESS                       varchar(32)             character set utf8 collate utf8_bin    not null comment '影院位置',
+  MOVIE_NAME                           varchar(32)             character set utf8 collate utf8_bin    not null comment '影片名称',
+  MOVIE_TIME                           varchar(32)             character set utf8 collate utf8_bin    not null comment '影片开始时间',
+  MOVIE_LABEL                          varchar(16)             character set utf8 collate utf8_bin    not null comment '影片标签',
+  CINEMA_SPECIFIC_ADDRESS              varchar(32)             character set utf8 collate utf8_bin    not null comment '观影具体位置',
 
-MOVIE_ORDER_NUM                      varchar(32)             character set utf8 collate utf8_bin    not null comment '影片订单号',
-USER_PHONE_NUM                       varchar(16              character set utf8 collate utf8_bin    not null comment '用户手机号',
-MOVIE_SERIAL_NUM                     varchar(16)             character set utf8 collate utf8_bin    not null comment '影片流水号',
-MOVIE_ORDER_NUM                      varchar(16)             character set utf8 collate utf8_bin    not null comment '影片订单号',
-ORDER_VERIFICATION_NUM               varchar(16)             character set utf8 collate utf8_bin    not null comment '订单验证码',
-ORDER_SUM_PRICE                      varchar(8)              character set utf8 collate utf8_bin    not null comment '订单总价',
+  MOVIE_ORDER_NUM                      varchar(32)             character set utf8 collate utf8_bin    not null comment '影片订单号',
+  USER_PHONE_NUM                       varchar(16              character set utf8 collate utf8_bin    not null comment '用户手机号',
+  MOVIE_SERIAL_NUM                     varchar(16)             character set utf8 collate utf8_bin    not null comment '影片流水号',
+  MOVIE_ORDER_NUM                      varchar(16)             character set utf8 collate utf8_bin    not null comment '影片订单号',
+  ORDER_VERIFICATION_NUM               varchar(16)             character set utf8 collate utf8_bin    not null comment '订单验证码',
+  ORDER_SUM_PRICE                      varchar(8)              character set utf8 collate utf8_bin    not null comment '订单总价',
 
-VERSION                              int                                                                null comment '业务版本',
-CREATE_TIME                          varchar(32)             character set utf8 collate utf8_bin        null comment '新建时间',
-CREATE_USERNAME                      varchar(32)             character set utf8 collate utf8_bin        null comment '新建账号',
-MODIFY_TIME                          varchar(32)             character set utf8 collate utf8_bin        null comment '更改时间',
-MODIFY_USERNAME                      varchar(32)             character set utf8 collate utf8_bin        null comment '更改账号',
+  VERSION                              int                                                                null comment '业务版本',
+  CREATE_TIME                          varchar(32)             character set utf8 collate utf8_bin        null comment '新建时间',
+  CREATE_USERNAME                      varchar(32)             character set utf8 collate utf8_bin        null comment '新建账号',
+  MODIFY_TIME                          varchar(32)             character set utf8 collate utf8_bin        null comment '更改时间',
+  MODIFY_USERNAME                      varchar(32)             character set utf8 collate utf8_bin        null comment '更改账号',
+
+  OPEN_ID                              char(36)                character set utf8 collate utf8_bin        null comment '所属微信用户',
 primary key(TICKET_ORDER_INFO_ID)
 )ENGINE=INNODB DEFAULT CHARSET=utf8 comment '影票订单信息';
+alter table WCT_TICKET_ORDER_INFO add constraint FK_WCT_TICKET_ORDER_INFO foreign key (OPEN_ID) references WCT_USER_INFO(OPEN_ID);
