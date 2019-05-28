@@ -4,9 +4,11 @@ import com.fuwenping.bysj.commons.exception.WechatTicketException;
 import com.fuwenping.bysj.entity.AccountInfo;
 import com.fuwenping.bysj.entity.CinemaInterfaceInfo;
 import com.fuwenping.bysj.entity.MovieInterfaceInfo;
+import com.fuwenping.bysj.entity.WechatUserInfo;
 import com.fuwenping.bysj.persistent.jdbc.IAccountInfoPersistent;
 import com.fuwenping.bysj.persistent.jdbc.ICinemaInterfaceInfoPersistent;
 import com.fuwenping.bysj.persistent.jdbc.IMovieInterfaceInfoPersistent;
+import com.fuwenping.bysj.persistent.jdbc.IWechatUserInfoPersisent;
 import com.fuwenping.bysj.service.spring.IWechatTicketService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -29,6 +31,10 @@ public class WechatTicketServiceImple implements IWechatTicketService {
   // 系统账号持久化层
   @javax.annotation.Resource(name = "AccountInfoPersistent")
   private IAccountInfoPersistent accountInfoPersistent;
+
+  // 微信用户持久化层
+  @javax.annotation.Resource(name = "WechatUserInfoPersisent")
+  private IWechatUserInfoPersisent wechatUserInfoPersisent;
 
   // 电影接口信息持久化层
   @javax.annotation.Resource(name = "MovieInterfaceInfoPersistent")
@@ -389,6 +395,125 @@ public class WechatTicketServiceImple implements IWechatTicketService {
       throw e;
     } catch (Exception e) {
       String errorMessage = "通过对象查询影院接口信息失败：业务逻辑错误";
+      log.error(errorMessage, e);
+      throw new WechatTicketException(errorMessage);
+    }
+  }
+
+  // 微信用户实现
+  @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
+  public void saveWechatUserInfo(WechatUserInfo wechatUserInfo) throws WechatTicketException {
+    if (log.isDebugEnabled()) {
+      log.debug("Staring call WechatTicketServic.saveWechatUserInfo ,parameters : [ wechatUserInfo  =  " + wechatUserInfo + "]");
+    }
+    try {
+      WechatUserInfo queryWechatUserInfo = new WechatUserInfo();
+      queryWechatUserInfo.setNickName(wechatUserInfo.getNickName());
+      Collection<WechatUserInfo> wechatUserInfoList = wechatUserInfoPersisent.getWechatUserInfoByObject(queryWechatUserInfo);
+      if (!wechatUserInfoList.isEmpty()) {
+        throw new WechatTicketException("创建微信用户信息失败：微信用户[" + wechatUserInfo.getNickName() + "]已经存在");
+      }
+      wechatUserInfoPersisent.saveWechatUserInfo(wechatUserInfo);
+    } catch (WechatTicketException e) {
+      wechatUserInfo.setOpenId(null);
+      log.error(e.getMessage(), e);
+      throw e;
+    } catch (Exception e) {
+      String errorMessage = "创建微信用户信息失败：业务逻辑错误";
+      log.error(errorMessage, e);
+      throw new WechatTicketException(errorMessage);
+    }
+  }
+
+  @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
+  public void updateWechatUserInfo(WechatUserInfo wechatUserInfo) throws WechatTicketException {
+    if (log.isDebugEnabled()) {
+      log.debug("Staring call WechatTicketServic.updateWechatUserInfo ,parameters : [ wechatUserInfo  =  " + wechatUserInfo + "]");
+    }
+    try {
+      WechatUserInfo oldWechatUserInfo = wechatUserInfoPersisent.getWechatUserInfoByPrimaryKey(wechatUserInfo.getOpenId());
+      if (oldWechatUserInfo == null || (!oldWechatUserInfo.getVersion().equals(oldWechatUserInfo.getVersion()))) {
+        throw new WechatTicketException("修改微信用户信息失败：原影微信用户信息不存在，或者数据版本不一致。");
+      }
+      boolean isHaveData = false;
+      WechatUserInfo queryWechatUserInfo = new WechatUserInfo();
+      queryWechatUserInfo.setNickName(wechatUserInfo.getNickName());
+      Collection<WechatUserInfo> wechatUserInfoList = wechatUserInfoPersisent.getWechatUserInfoByObject(queryWechatUserInfo);
+      if (!wechatUserInfoList.isEmpty() && wechatUserInfoList.size() > 1) {
+        isHaveData = true;
+      } else {
+        if (!wechatUserInfoList.isEmpty() && !oldWechatUserInfo.getOpenId().equals(wechatUserInfoList.iterator().next().getOpenId())) {
+          isHaveData = true;
+        }
+      }
+      if (isHaveData) {
+        throw new WechatTicketException("修改微信用户信息失败：微信用户信息[" + wechatUserInfo.getOpenId() + "]已经存在");
+      }
+      wechatUserInfo.setVersion(wechatUserInfo.getVersion() + 1);
+      wechatUserInfoPersisent.updateWechatUserInfo(wechatUserInfo);
+    } catch (WechatTicketException e) {
+      // e.printStackTrace();
+      log.error(e.getMessage(), e);
+      throw e;
+    } catch (Exception e) {
+      String errorMessage = "修改微信用户信息失败：业务逻辑错误";
+      log.error(errorMessage, e);
+      throw new WechatTicketException(errorMessage);
+    }
+  }
+
+  @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
+  public void removeWechatUserInfo(WechatUserInfo wechatUserInfo) throws WechatTicketException {
+    if (log.isDebugEnabled()) {
+      log.debug("Staring call WechatTicketServic.removeWechatUserInfo ,parameters : [ wechatUserInfo  =  " + wechatUserInfo + "]");
+    }
+    try {
+      wechatUserInfoPersisent.removeWechatUserInfo(wechatUserInfo);
+    } catch (WechatTicketException e) {
+      log.error(e.getMessage(), e);
+      throw e;
+    } catch (Exception e) {
+      String errorMessage = "删除微信用户信息失败：业务逻辑错误";
+      log.error(errorMessage, e);
+      throw new WechatTicketException(errorMessage);
+    }
+  }
+
+  @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
+  public WechatUserInfo getWechatUserInfoByPrimaryKey(String openId) throws WechatTicketException {
+    if (log.isDebugEnabled()) {
+      log.debug("Staring call WechatTicketServic.getWechatUserInfoByPrimaryKey ,parameters : [ openId  =  " + openId + "]");
+    }
+    try {
+      return wechatUserInfoPersisent.getWechatUserInfoByPrimaryKey(openId);
+    } catch (WechatTicketException e) {
+      e.printStackTrace();
+      log.error(e.getMessage(), e);
+      throw e;
+    } catch (Exception e) {
+      String errorMessage = "通过主键查询微信用户信息失败：业务逻辑错误";
+      log.error(errorMessage, e);
+      throw new WechatTicketException(errorMessage);
+    }
+  }
+
+  @Override
+  public Collection<WechatUserInfo> getWechatUserInfoByObject(WechatUserInfo wechatUserInfo) throws WechatTicketException {
+    if (log.isDebugEnabled()) {
+      log.debug("Staring call WechatTicketServic.getWechatUserInfoByObject ,parameters : [ wechatUserInfo  =  " + wechatUserInfo + "]");
+    }
+    try {
+      System.out.println("------" + wechatUserInfo);
+      return wechatUserInfoPersisent.getWechatUserInfoByObject(wechatUserInfo);
+    } catch (WechatTicketException e) {
+      log.error(e.getMessage(), e);
+      throw e;
+    } catch (Exception e) {
+      String errorMessage = "通过对象查询微信用户信息失败：业务逻辑错误";
       log.error(errorMessage, e);
       throw new WechatTicketException(errorMessage);
     }

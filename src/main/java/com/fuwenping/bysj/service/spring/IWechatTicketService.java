@@ -4,6 +4,7 @@ import com.fuwenping.bysj.commons.exception.WechatTicketException;
 import com.fuwenping.bysj.entity.AccountInfo;
 import com.fuwenping.bysj.entity.CinemaInterfaceInfo;
 import com.fuwenping.bysj.entity.MovieInterfaceInfo;
+import com.fuwenping.bysj.entity.WechatUserInfo;
 
 import java.util.Collection;
 
@@ -47,4 +48,15 @@ public interface IWechatTicketService {
   public CinemaInterfaceInfo getCinemaInterfaceInfoByPrimaryKey(String cinemaInterfaceId) throws WechatTicketException;
 
   public Collection<CinemaInterfaceInfo> getCinemaInterfaceInfoByObject(CinemaInterfaceInfo cinemaInterfaceInfo) throws WechatTicketException;
+
+  // WechatUserInfo
+  public void saveWechatUserInfo(WechatUserInfo wechatUserInfo) throws WechatTicketException;
+
+  public void updateWechatUserInfo(WechatUserInfo wechatUserInfo) throws WechatTicketException;
+
+  public void removeWechatUserInfo(WechatUserInfo wechatUserInfo) throws WechatTicketException;
+
+  public WechatUserInfo getWechatUserInfoByPrimaryKey(String openId) throws WechatTicketException;
+
+  public Collection<WechatUserInfo> getWechatUserInfoByObject(WechatUserInfo wechatUserInfo) throws WechatTicketException;
 }

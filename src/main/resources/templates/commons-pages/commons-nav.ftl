@@ -48,7 +48,7 @@
         </a>
       </li>
       <li <#if (activeMenu ?? && "wechat" == activeMenu ) > class="active" </#if> >
-        <a href="${webContextPath!}/account">
+        <a href="${webContextPath!}/wechatuserinfoadmin">
           <i class="fa fa-wechat"></i>
           <span>微信用户管理</span>
         </a>
