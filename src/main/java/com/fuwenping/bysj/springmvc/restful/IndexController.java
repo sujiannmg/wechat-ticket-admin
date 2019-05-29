@@ -46,4 +46,12 @@ public class IndexController extends BaseController {
       return super.getView("login", e);
     }
   }
+
+  // 登出
+  @RequestMapping(value = { "logout" })
+  public ModelAndView logout() {
+    super.getSession().removeAttribute(LOGIN_ACCOUNT_KEY);
+    super.getSession().invalidate();
+    return super.getView("login");
+  }
 }

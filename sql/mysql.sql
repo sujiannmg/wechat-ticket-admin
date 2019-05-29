@@ -136,7 +136,6 @@ create table WCT_TICKET_ORDER_INFO(
   MOVIE_ORDER_NUM                      varchar(32)             character set utf8 collate utf8_bin    not null comment '影片订单号',
   USER_PHONE_NUM                       varchar(16              character set utf8 collate utf8_bin    not null comment '用户手机号',
   MOVIE_SERIAL_NUM                     varchar(16)             character set utf8 collate utf8_bin    not null comment '影片流水号',
-  MOVIE_ORDER_NUM                      varchar(16)             character set utf8 collate utf8_bin    not null comment '影片订单号',
   ORDER_VERIFICATION_NUM               varchar(16)             character set utf8 collate utf8_bin    not null comment '订单验证码',
   ORDER_SUM_PRICE                      varchar(8)              character set utf8 collate utf8_bin    not null comment '订单总价',
 

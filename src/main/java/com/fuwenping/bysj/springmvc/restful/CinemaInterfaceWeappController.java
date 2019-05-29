@@ -44,17 +44,17 @@ public class CinemaInterfaceWeappController extends BaseController {
       // 获取接口数据
       saveResult = httpClientUtil.httpGet("https://m.maoyan.com/ajax/filterCinemas");
       if(!oldCinemaInterfaceInfo.getCinemaInterfaceId().equals(null)) {
-        // 电影接口编号
+        // 影院接口编号
         cinemaInterfaceInfo.setCinemaInterfaceId("c831b672-4090-494d-b647-7200f9bce5d0");
-        // 电影接口名称
+        // 影院接口名称
         cinemaInterfaceInfo.setCinemaInterfaceName("搜索影院列表");
-        // 电影接口类型
+        // 影院接口类型
         cinemaInterfaceInfo.setCinemaInterfaceType("GET请求");
-        // 电影接口地址
+        // 影院接口地址
         cinemaInterfaceInfo.setCinemaInterfaceUrl("https://m.maoyan.com/ajax/filterCinemas");
-        // 电影接口参数
+        // 影院接口参数
         cinemaInterfaceInfo.setCinemaInterfacePaprm("无参数");
-        // 电影接口编码
+        // 影院接口编码
         cinemaInterfaceInfo.setCinemaInterfaceAscii("UTF-8");
         // 接口响应状态
         cinemaInterfaceInfo.setCinemaInterfaceCode(200);
@@ -70,15 +70,15 @@ public class CinemaInterfaceWeappController extends BaseController {
         cinemaInterfaceInfo.setCinemaReponseTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         wechatTicketService.updateCinemaInterfaceInfo(cinemaInterfaceInfo);
       } else {
-        // 电影接口名称
+        // 影院接口名称
         cinemaInterfaceInfo.setCinemaInterfaceName("搜索影院列表");
-        // 电影接口类型
+        // 影院接口类型
         cinemaInterfaceInfo.setCinemaInterfaceType("GET请求");
-        // 电影接口地址
+        // 影院接口地址
         cinemaInterfaceInfo.setCinemaInterfaceUrl("https://m.maoyan.com/ajax/filterCinemas");
-        // 电影接口参数
+        // 影院接口参数
         cinemaInterfaceInfo.setCinemaInterfacePaprm("无参数");
-        // 电影接口编码
+        // 影院接口编码
         cinemaInterfaceInfo.setCinemaInterfaceAscii("UTF-8");
         // 接口响应状态
         cinemaInterfaceInfo.setCinemaInterfaceCode(200);
@@ -99,67 +99,68 @@ public class CinemaInterfaceWeappController extends BaseController {
     }
   }
 
-  // 电影最近最受欢迎接口
-  @RequestMapping(value = { "mostexpected" }, method = RequestMethod.GET)
-  public String getMovieMostExpected() {
+  // 影院列表接口
+  @RequestMapping(value = { "cinemalist" }, method = RequestMethod.GET)
+  public String getCinemaList() {
     try {
       // 保存请求结果
       String saveResult = null;
       // 初始化请求
       HttpClientUtil httpClientUtil = new HttpClientUtil();
-      MovieInterfaceInfo movieInterfaceInfo = new MovieInterfaceInfo();
+      CinemaInterfaceInfo cinemaInterfaceInfo = new CinemaInterfaceInfo();
       // 通过主键查询到第一次增加的数据对象
-      MovieInterfaceInfo oldMovieInterfaceInfo = wechatTicketService.getMovieInterfaceInfoByPrimaryKey("977fba01-a2d1-4076-a37f-5f845594509d");
+      CinemaInterfaceInfo oldCinemaInterfaceInfo = wechatTicketService.getCinemaInterfaceInfoByPrimaryKey("0a146026-48c5-4931-ac5e-d14d522e286c");
       // 获取接口数据
-      saveResult = httpClientUtil.httpGet("https://m.maoyan.com/ajax/mostExpected?limit=10&offset=0&token=");
-      if(!oldMovieInterfaceInfo.getMovieInterfaceId().equals(null)) {
-        // 电影接口编号
-        movieInterfaceInfo.setMovieInterfaceId("977fba01-a2d1-4076-a37f-5f845594509d");
-        // 电影接口名称
-        movieInterfaceInfo.setMovieInterfaceName("最近最受欢迎电影列表");
-        // 电影接口类型
-        movieInterfaceInfo.setMovieInterfaceType("GET请求");
-        // 电影接口地址
-        movieInterfaceInfo.setMovieInterfaceUrl("https://m.maoyan.com/ajax/mostExpected?limit=10&offset=0&token=");
-        // 电影接口参数
-        movieInterfaceInfo.setMovieInterfacePaprm("无参数");
-        // 电影接口编码
-        movieInterfaceInfo.setMovieInterfaceAscii("UTF-8");
+      saveResult = httpClientUtil.httpGet("https://m.maoyan.com/ajax/cinemaList");
+
+      if(!oldCinemaInterfaceInfo.getCinemaInterfaceId().equals(null)) {
+        // 影院接口编号
+        cinemaInterfaceInfo.setCinemaInterfaceId("0a146026-48c5-4931-ac5e-d14d522e286c");
+        // 影院接口名称
+        cinemaInterfaceInfo.setCinemaInterfaceName("影院列表");
+        // 影院接口类型
+        cinemaInterfaceInfo.setCinemaInterfaceType("GET请求");
+        // 影院接口地址
+        cinemaInterfaceInfo.setCinemaInterfaceUrl("https://m.maoyan.com/ajax/cinemaList");
+        // 影院接口参数
+        cinemaInterfaceInfo.setCinemaInterfacePaprm("无参数");
+        // 影院接口编码
+        cinemaInterfaceInfo.setCinemaInterfaceAscii("UTF-8");
         // 接口响应状态
-        movieInterfaceInfo.setMovieInterfaceCode(200);
+        cinemaInterfaceInfo.setCinemaInterfaceCode(200);
         // 响应内容长度
-        movieInterfaceInfo.setMovieReponseLength(-1);
+        cinemaInterfaceInfo.setCinemaReponseLength(-1);
         // 业务版本
-        movieInterfaceInfo.setVersion(oldMovieInterfaceInfo.getVersion());
+        cinemaInterfaceInfo.setVersion(oldCinemaInterfaceInfo.getVersion());
         // 接口响应内容
-        movieInterfaceInfo.setMovieinterfaceContent(saveResult);
+        cinemaInterfaceInfo.setCinemaInterfaceContent(saveResult);
         // 调用接口次数
-        movieInterfaceInfo.setMovieReponseNum(oldMovieInterfaceInfo.getMovieReponseNum() + 1); // 查出原来数据+1操作。使用标志判断
+        cinemaInterfaceInfo.setCinemaReponseNum(oldCinemaInterfaceInfo.getCinemaReponseNum() + 1);
         // 调用接口时间
-        movieInterfaceInfo.setMovieReponseTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-        wechatTicketService.updateMovieInterfaceInfo(movieInterfaceInfo);
+        cinemaInterfaceInfo.setCinemaReponseTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        wechatTicketService.updateCinemaInterfaceInfo(cinemaInterfaceInfo);
       } else {
-        // 电影接口名称
-        movieInterfaceInfo.setMovieInterfaceName("最近最受欢迎电影列表");
-        // 电影接口类型
-        movieInterfaceInfo.setMovieInterfaceType("GET请求");
-        // 电影接口地址
-        movieInterfaceInfo.setMovieInterfaceUrl("https://m.maoyan.com/ajax/mostExpected?limit=10&offset=0&token=");
-        // 电影接口参数
-        movieInterfaceInfo.setMovieInterfacePaprm("无参数");
-        // 电影接口编码
-        movieInterfaceInfo.setMovieInterfaceAscii("UTF-8");
-        // 接口响应状态
-        movieInterfaceInfo.setMovieInterfaceCode(200);
-        // 响应内容长度
-        movieInterfaceInfo.setMovieReponseLength(-1);
-        // 接口响应内容
-        movieInterfaceInfo.setMovieinterfaceContent(saveResult);
-        // 调用接口次数
-        movieInterfaceInfo.setMovieReponseNum(1);
-        // 调用接口时间
-        movieInterfaceInfo.setMovieReponseTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-        wechatTicketService.saveMovieInterfaceInfo(movieInterfaceInfo);
+        // 影院接口名称
+      cinemaInterfaceInfo.setCinemaInterfaceName("影院列表");
+      // 影院接口类型
+      cinemaInterfaceInfo.setCinemaInterfaceType("GET请求");
+      // 影院接口地址
+      cinemaInterfaceInfo.setCinemaInterfaceUrl("https://m.maoyan.com/ajax/cinemaList");
+      // 影院接口参数
+      cinemaInterfaceInfo.setCinemaInterfacePaprm("无参数");
+      // 影院接口编码
+      cinemaInterfaceInfo.setCinemaInterfaceAscii("UTF-8");
+      // 接口响应状态
+      cinemaInterfaceInfo.setCinemaInterfaceCode(200);
+      // 响应内容长度
+      cinemaInterfaceInfo.setCinemaReponseLength(-1);
+      // 接口响应内容
+      cinemaInterfaceInfo.setCinemaInterfaceContent(saveResult);
+      // 调用接口次数
+      cinemaInterfaceInfo.setCinemaReponseNum(1);
+      // 调用接口时间
+      cinemaInterfaceInfo.setCinemaReponseTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+      wechatTicketService.saveCinemaInterfaceInfo(cinemaInterfaceInfo);
       }
       return saveResult;
     } catch (WechatTicketException e) {

@@ -1,14 +1,8 @@
 package com.fuwenping.bysj.service.spring.impl;
 
 import com.fuwenping.bysj.commons.exception.WechatTicketException;
-import com.fuwenping.bysj.entity.AccountInfo;
-import com.fuwenping.bysj.entity.CinemaInterfaceInfo;
-import com.fuwenping.bysj.entity.MovieInterfaceInfo;
-import com.fuwenping.bysj.entity.WechatUserInfo;
-import com.fuwenping.bysj.persistent.jdbc.IAccountInfoPersistent;
-import com.fuwenping.bysj.persistent.jdbc.ICinemaInterfaceInfoPersistent;
-import com.fuwenping.bysj.persistent.jdbc.IMovieInterfaceInfoPersistent;
-import com.fuwenping.bysj.persistent.jdbc.IWechatUserInfoPersisent;
+import com.fuwenping.bysj.entity.*;
+import com.fuwenping.bysj.persistent.jdbc.*;
 import com.fuwenping.bysj.service.spring.IWechatTicketService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,6 +37,14 @@ public class WechatTicketServiceImple implements IWechatTicketService {
   // 影院接口信息持久化层
   @javax.annotation.Resource(name = "CinemaInterfaceInfoPersistent")
   private ICinemaInterfaceInfoPersistent cinemaInterfaceInfoPersistent;
+
+  // 影评接口信息持久化层
+  @javax.annotation.Resource(name = "CommentInterfaceInfoPersisent")
+  private ICommentInterfaceInfoPersistent commentInterfaceInfoPersisent;
+
+  // 影票订单信息持久化层
+  @javax.annotation.Resource(name = "TicketOrderInfoPersisent")
+  private ITicketOrderInfoPersisent ticketOrderInfoPersisent;
 
   // 系统账号实现
   @Override
@@ -514,6 +516,250 @@ public class WechatTicketServiceImple implements IWechatTicketService {
       throw e;
     } catch (Exception e) {
       String errorMessage = "通过对象查询微信用户信息失败：业务逻辑错误";
+      log.error(errorMessage, e);
+      throw new WechatTicketException(errorMessage);
+    }
+  }
+
+  // 影评接口实现
+  @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
+  public void saveCommentInterfaceInfo(CommentInterfaceInfo commentInterfaceInfo) throws WechatTicketException {
+    if (log.isDebugEnabled()) {
+      log.debug("Staring call WechatTicketServic.saveCommentInterfaceInfo ,parameters : [ commentInterfaceInfo  =  " + commentInterfaceInfo + "]");
+    }
+    try {
+      CommentInterfaceInfo queryCommentInterfaceInfo = new CommentInterfaceInfo();
+      queryCommentInterfaceInfo.setCommentInterfaceName(commentInterfaceInfo.getCommentInterfaceName());
+      Collection<CommentInterfaceInfo> commentInterfaceInfoList = commentInterfaceInfoPersisent.getCommentInterfaceInfoByObject(queryCommentInterfaceInfo);
+      if (!commentInterfaceInfoList.isEmpty()) {
+        throw new WechatTicketException("创建影评接口信息失败：影评[" + commentInterfaceInfo.getCommentInterfaceName() + "]已经存在");
+      }
+      commentInterfaceInfoPersisent.saveCommentInterfaceInfo(commentInterfaceInfo);
+    } catch (WechatTicketException e) {
+      commentInterfaceInfo.setCommentInterfaceId(null);
+      log.error(e.getMessage(), e);
+      throw e;
+    } catch (Exception e) {
+      String errorMessage = "创建影评接口信息失败：业务逻辑错误";
+      log.error(errorMessage, e);
+      throw new WechatTicketException(errorMessage);
+    }
+  }
+
+  @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
+  public void updateCommentInterfaceInfo(CommentInterfaceInfo commentInterfaceInfo) throws WechatTicketException {
+    if (log.isDebugEnabled()) {
+      log.debug("Staring call WechatTicketServic.updateCommentInterfaceInfo ,parameters : [ commentInterfaceInfo  =  " + commentInterfaceInfo + "]");
+    }
+    try {
+      CommentInterfaceInfo oldCommentInterfaceInfo = commentInterfaceInfoPersisent.getCommentInterfaceInfoByPrimaryKey(commentInterfaceInfo.getCommentInterfaceId());
+      if (oldCommentInterfaceInfo == null || (!oldCommentInterfaceInfo.getVersion().equals(oldCommentInterfaceInfo.getVersion()))) {
+        throw new WechatTicketException("修改影评接口信息失败：原影评接口信息不存在，或者数据版本不一致。");
+      }
+      boolean isHaveData = false;
+      CommentInterfaceInfo queryCommentInterfaceInfo = new CommentInterfaceInfo();
+      queryCommentInterfaceInfo.setCommentInterfaceName(commentInterfaceInfo.getCommentInterfaceName());
+      Collection<CommentInterfaceInfo> commentInterfaceInfoList = commentInterfaceInfoPersisent.getCommentInterfaceInfoByObject(queryCommentInterfaceInfo);
+      if (!commentInterfaceInfoList.isEmpty() && commentInterfaceInfoList.size() > 1) {
+        isHaveData = true;
+      } else {
+        if (!commentInterfaceInfoList.isEmpty() && !oldCommentInterfaceInfo.getCommentInterfaceId().equals(commentInterfaceInfoList.iterator().next().getCommentInterfaceId())) {
+          isHaveData = true;
+        }
+      }
+      if (isHaveData) {
+        throw new WechatTicketException("修改影评接口信息失败：影评接口信息[" + commentInterfaceInfo.getCommentInterfaceId() + "]已经存在");
+      }
+      commentInterfaceInfo.setVersion(commentInterfaceInfo.getVersion() + 1);
+      commentInterfaceInfoPersisent.updateCommentInterfaceInfo(commentInterfaceInfo);
+    } catch (WechatTicketException e) {
+      // e.printStackTrace();
+      log.error(e.getMessage(), e);
+      throw e;
+    } catch (Exception e) {
+      String errorMessage = "修改影评接口信息失败：业务逻辑错误";
+      log.error(errorMessage, e);
+      throw new WechatTicketException(errorMessage);
+    }
+  }
+
+  @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
+  public void removeCommentInterfaceInfo(CommentInterfaceInfo commentInterfaceInfo) throws WechatTicketException {
+    if (log.isDebugEnabled()) {
+      log.debug("Staring call WechatTicketServic.removeCommentInterfaceInfo ,parameters : [ commentInterfaceInfo  =  " + commentInterfaceInfo + "]");
+    }
+    try {
+      commentInterfaceInfoPersisent.removeCommentInterfaceInfo(commentInterfaceInfo);
+    } catch (WechatTicketException e) {
+      log.error(e.getMessage(), e);
+      throw e;
+    } catch (Exception e) {
+      String errorMessage = "删除影评接口信息失败：业务逻辑错误";
+      log.error(errorMessage, e);
+      throw new WechatTicketException(errorMessage);
+    }
+  }
+
+  @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
+  public CommentInterfaceInfo getCommentInterfaceInfoByPrimaryKey(String commentInterfaceId) throws WechatTicketException {
+    if (log.isDebugEnabled()) {
+      log.debug("Staring call WechatTicketServic.getCommentInterfaceInfoByPrimaryKey ,parameters : [ commentInterfaceId  =  " + commentInterfaceId + "]");
+    }
+    try {
+      return commentInterfaceInfoPersisent.getCommentInterfaceInfoByPrimaryKey(commentInterfaceId);
+    } catch (WechatTicketException e) {
+      e.printStackTrace();
+      log.error(e.getMessage(), e);
+      throw e;
+    } catch (Exception e) {
+      String errorMessage = "通过主键查询影评接口信息失败：业务逻辑错误";
+      log.error(errorMessage, e);
+      throw new WechatTicketException(errorMessage);
+    }
+  }
+
+  @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
+  public Collection<CommentInterfaceInfo> getCommentInterfaceInfoByObject(CommentInterfaceInfo commentInterfaceInfo) throws WechatTicketException {
+    if (log.isDebugEnabled()) {
+      log.debug("Staring call WechatTicketServic.getCommentInterfaceInfoByObject ,parameters : [ commentInterfaceInfo  =  " + commentInterfaceInfo + "]");
+    }
+    try {
+      System.out.println("------" + commentInterfaceInfo);
+      return commentInterfaceInfoPersisent.getCommentInterfaceInfoByObject(commentInterfaceInfo);
+    } catch (WechatTicketException e) {
+      log.error(e.getMessage(), e);
+      throw e;
+    } catch (Exception e) {
+      String errorMessage = "通过对象查询影票订单信息失败：业务逻辑错误";
+      log.error(errorMessage, e);
+      throw new WechatTicketException(errorMessage);
+    }
+  }
+
+  // 影票订单信息
+
+  @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
+  public void saveTicketOrderInfo(TicketOrderInfo ticketOrderInfo) throws WechatTicketException {
+    if (log.isDebugEnabled()) {
+      log.debug("Staring call WechatTicketServic.saveTicketOrderInfo ,parameters : [ ticketOrderInfo  =  " + ticketOrderInfo + "]");
+    }
+    try {
+      /*
+      TicketOrderInfo queryTicketOrderInfo = new TicketOrderInfo();
+      queryTicketOrderInfo.setCinemaName(ticketOrderInfo.getCinemaName());
+      Collection<TicketOrderInfo> ticketOrderInfoList = ticketOrderInfoPersisent.getTicketOrderInfoByObject(queryTicketOrderInfo);
+      if (!ticketOrderInfoList.isEmpty()) {
+        throw new WechatTicketException("创建影评接口信息失败：影评[" + ticketOrderInfo.getMovieName() + "]已经存在");
+      }
+      */
+      ticketOrderInfoPersisent.saveTicketOrderInfo(ticketOrderInfo);
+    } catch (WechatTicketException e) {
+      ticketOrderInfo.setTicketOrderInfoId(null);
+      log.error(e.getMessage(), e);
+      throw e;
+    } catch (Exception e) {
+      String errorMessage = "创建影票订单信息失败：业务逻辑错误";
+      log.error(errorMessage, e);
+      throw new WechatTicketException(errorMessage);
+    }
+  }
+
+  @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
+  public void updateTicketOrderInfo(TicketOrderInfo ticketOrderInfo) throws WechatTicketException {
+    if (log.isDebugEnabled()) {
+      log.debug("Staring call WechatTicketServic.updateTicketOrderInfo ,parameters : [ ticketOrderInfo  =  " + ticketOrderInfo + "]");
+    }
+    try {
+      TicketOrderInfo oldTicketOrderInfo = ticketOrderInfoPersisent.getTicketOrderInfoByPrimaryKey(ticketOrderInfo.getTicketOrderInfoId());
+      if (oldTicketOrderInfo == null || (!oldTicketOrderInfo.getVersion().equals(oldTicketOrderInfo.getVersion()))) {
+        throw new WechatTicketException("修改影票订单信息失败：原影票订单信息不存在，或者数据版本不一致。");
+      }
+      boolean isHaveData = false;
+      TicketOrderInfo queryTicketOrderInfo = new TicketOrderInfo();
+      queryTicketOrderInfo.setCinemaName(ticketOrderInfo.getCinemaName());
+      Collection<TicketOrderInfo> ticketOrderInfoList = ticketOrderInfoPersisent.getTicketOrderInfoByObject(queryTicketOrderInfo);
+      if (!ticketOrderInfoList.isEmpty() && ticketOrderInfoList.size() > 1) {
+        isHaveData = true;
+      } else {
+        if (!ticketOrderInfoList.isEmpty() && !oldTicketOrderInfo.getTicketOrderInfoId().equals(ticketOrderInfoList.iterator().next().getTicketOrderInfoId())) {
+          isHaveData = true;
+        }
+      }
+      if (isHaveData) {
+        throw new WechatTicketException("修改影票订单信息失败：影评接口信息[" + ticketOrderInfo.getTicketOrderInfoId() + "]已经存在");
+      }
+      ticketOrderInfo.setVersion(ticketOrderInfo.getVersion() + 1);
+      ticketOrderInfoPersisent.updateTicketOrderInfo(ticketOrderInfo);
+    } catch (WechatTicketException e) {
+      // e.printStackTrace();
+      log.error(e.getMessage(), e);
+      throw e;
+    } catch (Exception e) {
+      String errorMessage = "修改影票订单信息失败：业务逻辑错误";
+      log.error(errorMessage, e);
+      throw new WechatTicketException(errorMessage);
+    }
+  }
+
+  @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
+  public void removeTicketOrderInfo(TicketOrderInfo ticketOrderInfo) throws WechatTicketException {
+    if (log.isDebugEnabled()) {
+      log.debug("Staring call WechatTicketServic.removeTicketOrderInfo ,parameters : [ ticketOrderInfo  =  " + ticketOrderInfo + "]");
+    }
+    try {
+      ticketOrderInfoPersisent.removeTicketOrderInfo(ticketOrderInfo);
+
+    } catch (WechatTicketException e) {
+      log.error(e.getMessage(), e);
+      throw e;
+    } catch (Exception e) {
+      String errorMessage = "删除应票订单信息失败：业务逻辑错误";
+      log.error(errorMessage, e);
+      throw new WechatTicketException(errorMessage);
+    }
+  }
+
+  @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
+  public TicketOrderInfo getTicketOrderInfoByPrimaryKey(String ticketOrderInfoId) throws WechatTicketException {
+    if (log.isDebugEnabled()) {
+      log.debug("Staring call WechatTicketServic.getTicketOrderInfoByPrimaryKey ,parameters : [ ticketOrderInfoId  =  " + ticketOrderInfoId + "]");
+    }
+    try {
+      return ticketOrderInfoPersisent.getTicketOrderInfoByPrimaryKey(ticketOrderInfoId);
+    } catch (WechatTicketException e) {
+      e.printStackTrace();
+      log.error(e.getMessage(), e);
+      throw e;
+    } catch (Exception e) {
+      String errorMessage = "通过主键查询影评接口信息失败：业务逻辑错误";
+      log.error(errorMessage, e);
+      throw new WechatTicketException(errorMessage);
+    }
+  }
+
+  @Override
+  @org.springframework.transaction.annotation.Transactional(readOnly = false)
+  public Collection<TicketOrderInfo> getTicketOrderInfoByObject(TicketOrderInfo ticketOrderInfo) throws WechatTicketException {
+    if (log.isDebugEnabled()) {
+      log.debug("Staring call WechatTicketServic.getTicketOrderInfoByObject ,parameters : [ ticketOrderInfo  =  " + ticketOrderInfo + "]");
+    }
+    try {
+      System.out.println("------" + ticketOrderInfo);
+      return ticketOrderInfoPersisent.getTicketOrderInfoByObject(ticketOrderInfo);
+    } catch (WechatTicketException e) {
+      log.error(e.getMessage(), e);
+      throw e;
+    } catch (Exception e) {
+      String errorMessage = "通过对象查询影评接口信息失败：业务逻辑错误";
       log.error(errorMessage, e);
       throw new WechatTicketException(errorMessage);
     }

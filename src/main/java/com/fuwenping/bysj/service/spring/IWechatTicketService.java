@@ -1,10 +1,7 @@
 package com.fuwenping.bysj.service.spring;
 
 import com.fuwenping.bysj.commons.exception.WechatTicketException;
-import com.fuwenping.bysj.entity.AccountInfo;
-import com.fuwenping.bysj.entity.CinemaInterfaceInfo;
-import com.fuwenping.bysj.entity.MovieInterfaceInfo;
-import com.fuwenping.bysj.entity.WechatUserInfo;
+import com.fuwenping.bysj.entity.*;
 
 import java.util.Collection;
 
@@ -59,4 +56,26 @@ public interface IWechatTicketService {
   public WechatUserInfo getWechatUserInfoByPrimaryKey(String openId) throws WechatTicketException;
 
   public Collection<WechatUserInfo> getWechatUserInfoByObject(WechatUserInfo wechatUserInfo) throws WechatTicketException;
+
+  // CommentInterfaceInfo
+  public void saveCommentInterfaceInfo(CommentInterfaceInfo commentInterfaceInfo) throws WechatTicketException;
+
+  public void updateCommentInterfaceInfo(CommentInterfaceInfo commentInterfaceInfo) throws WechatTicketException;
+
+  public void removeCommentInterfaceInfo(CommentInterfaceInfo commentInterfaceInfo) throws WechatTicketException;
+
+  public CommentInterfaceInfo getCommentInterfaceInfoByPrimaryKey(String commentInterfaceId) throws WechatTicketException;
+
+  public Collection<CommentInterfaceInfo> getCommentInterfaceInfoByObject(CommentInterfaceInfo commentInterfaceInfo) throws WechatTicketException;
+
+  // TicketOrderInfo
+  public void saveTicketOrderInfo(TicketOrderInfo ticketOrderInfo) throws WechatTicketException;
+
+  public void updateTicketOrderInfo(TicketOrderInfo ticketOrderInfo) throws WechatTicketException;
+
+  public void removeTicketOrderInfo(TicketOrderInfo ticketOrderInfo) throws WechatTicketException;
+
+  public TicketOrderInfo getTicketOrderInfoByPrimaryKey(String ticketOrderInfoId) throws WechatTicketException;
+
+  public Collection<TicketOrderInfo> getTicketOrderInfoByObject(TicketOrderInfo ticketOrderInfo) throws WechatTicketException;
 }
