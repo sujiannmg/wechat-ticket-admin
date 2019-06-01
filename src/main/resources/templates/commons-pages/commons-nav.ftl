@@ -71,8 +71,8 @@
           <span>影评接口信息管理</span>
         </a>
       </li>
-      <li <#if (activeMenu ?? && "ticket" == activeMenu ) > class="active" </#if> >
-        <a href="${webContextPath!}/cinemainterface">
+      <li <#if (activeMenu ?? && "order" == activeMenu ) > class="active" </#if> >
+        <a href="${webContextPath!}/ticketorderinfoadmin">
           <i class="fa fa-ticket"></i>
           <span>影票订单信息管理</span>
         </a>

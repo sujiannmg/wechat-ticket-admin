@@ -43,7 +43,7 @@ public class WechatUserInfoWeappController extends BaseController {
         // 用户非敏感信息：rawData
         // 签名：signature
         JSONObject rawDataJson = JSON.parseObject(rawData);
-        System.out.println("rawDataJson" + rawDataJson);
+        // System.out.println("rawDataJson" + rawDataJson);
         // 1.接收小程序发送的code
         // 2.开发者服务器 登录凭证校验接口 appi + appsecret + code
         JSONObject SessionKeyOpenId = WechatUtil.getSessionKeyOrOpenId(code);

@@ -38,36 +38,37 @@ public class TicketOrderInfoWeappController extends BaseController {
       try {
 
         JSONObject orderJson = JSON.parseObject(order);
-        System.out.println("-------orderJson------" + orderJson);
-        // TicketOrderInfo ticketOrderInfo = wechatTicketService.get
+        // System.out.println("-------orderJson------" + orderJson);
+        TicketOrderInfo ticketOrderInfo = new TicketOrderInfo();
 
-//        JSONObject cinemaAddress1 = JSON.parseObject(cinemaAddress);
-//        System.out.println("-------cinemaAddress1------" + cinemaAddress1);
-//        JSONObject movieName1 = JSON.parseObject(movieName);
-//        System.out.println("-------movieName1------" + movieName1);
-//        JSONObject movieTime1 = JSON.parseObject(movieTime);
-//        System.out.println("-------movieTime1------" + movieTime1);
-//        JSONObject movieLabel1 = JSON.parseObject(movieLabel);
-//        System.out.println("-------movieLabel1------" + movieLabel1);
-//        JSONObject cinemaSpecificAddress1 = JSON.parseObject(cinemaSpecificAddress);
-//        System.out.println("-------cinemaSpecificAddress1------" + cinemaSpecificAddress1);
-//        JSONObject movieOrderNum1 = JSON.parseObject(movieOrderNum);
-//        System.out.println("-------movieOrderNum1------" + movieOrderNum1);
-//        JSONObject userPhoneNum1 = JSON.parseObject(userPhoneNum);
-//        System.out.println("-------userPhoneNum1------" + userPhoneNum1);
-//        JSONObject movieSerialNum1 = JSON.parseObject(movieSerialNum);
-//        System.out.println("-------movieSerialNum1------" + movieSerialNum1);
-//        JSONObject orderVerificationNum1 = JSON.parseObject(orderVerificationNum);
-//        System.out.println("-------orderVerificationNum1------" + orderVerificationNum1);
-//        JSONObject orderSumPrice1 = JSON.parseObject(orderSumPrice);
-//        System.out.println("-------orderSumPrice1------" + orderSumPrice1);
+        // 订单信息入库
+        String cinemaName = orderJson.getString("cinemaName");
+        String cinemaAddress = orderJson.getString("cinemaAddress");
+        String movieName = orderJson.getString("movieName");
+        String movieTime = orderJson.getString("movieTime");
+        String movieLabel = orderJson.getString("movieLabel");
+        String cinemaSpecificAddress = orderJson.getString("cinemaSpecificAddress");
+        String movieOrderNum = orderJson.getString("movieOrderNum");
+        String userPhoneNum = orderJson.getString("userPhoneNum");
+        String movieSerialNum = orderJson.getString("movieSerialNum");
+        String orderVerificationNum = orderJson.getString("orderVerificationNum");
+        String orderSumPrice = orderJson.getString("orderSumPrice");
 
-        wechatTicketService.updateWechatUserInfo(null);
-        //encrypteData比rowData多了appid和openid
-        //JSONObject userInfo = WechatUtil.getUserInfo(encrypteData, sessionKey, iv);
-        //6. 把新的skey返回给小程序
+        ticketOrderInfo.setCinemaName(cinemaName);
+        ticketOrderInfo.setCinemaAddress(cinemaAddress);
+        ticketOrderInfo.setMovieName(movieName);
+        ticketOrderInfo.setMovieTime(movieTime);
+        ticketOrderInfo.setMovieLabel(movieLabel);
+        ticketOrderInfo.setCinemaSpecificAddress(cinemaSpecificAddress);
+        ticketOrderInfo.setMovieOrderNum(movieOrderNum);
+        ticketOrderInfo.setUserPhoneNum(userPhoneNum);
+        ticketOrderInfo.setMovieSerialNum(movieSerialNum);
+        ticketOrderInfo.setOrderVerificationNum(orderVerificationNum);
+        ticketOrderInfo.setOrderSumPrice(orderSumPrice);
+
+        wechatTicketService.saveTicketOrderInfo(ticketOrderInfo);
         GlobalResult result = GlobalResult.build(200, null, null);
-        return null;
+        return result;
       } catch (WechatTicketException e) {
         e.printStackTrace();
         return null;

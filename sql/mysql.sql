@@ -127,14 +127,14 @@ drop table if exists WCT_TICKET_ORDER_INFO;
 create table WCT_TICKET_ORDER_INFO(
   TICKET_ORDER_INFO_ID                 char(36)                character set utf8 collate utf8_bin    not null comment '影票订单编号',
   CINEMA_NAME                          varchar(32)             character set utf8 collate utf8_bin    not null comment '影院名称',
-  CINEMA_ADDRESS                       varchar(32)             character set utf8 collate utf8_bin    not null comment '影院位置',
+  CINEMA_ADDRESS                       varchar(64)             character set utf8 collate utf8_bin    not null comment '影院位置',
   MOVIE_NAME                           varchar(32)             character set utf8 collate utf8_bin    not null comment '影片名称',
   MOVIE_TIME                           varchar(32)             character set utf8 collate utf8_bin    not null comment '影片开始时间',
   MOVIE_LABEL                          varchar(16)             character set utf8 collate utf8_bin    not null comment '影片标签',
   CINEMA_SPECIFIC_ADDRESS              varchar(32)             character set utf8 collate utf8_bin    not null comment '观影具体位置',
 
   MOVIE_ORDER_NUM                      varchar(32)             character set utf8 collate utf8_bin    not null comment '影片订单号',
-  USER_PHONE_NUM                       varchar(16              character set utf8 collate utf8_bin    not null comment '用户手机号',
+  USER_PHONE_NUM                       varchar(16              character set utf8 collate utf8_bin        null comment '用户手机号',
   MOVIE_SERIAL_NUM                     varchar(16)             character set utf8 collate utf8_bin    not null comment '影片流水号',
   ORDER_VERIFICATION_NUM               varchar(16)             character set utf8 collate utf8_bin    not null comment '订单验证码',
   ORDER_SUM_PRICE                      varchar(8)              character set utf8 collate utf8_bin    not null comment '订单总价',
