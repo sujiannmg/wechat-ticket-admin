@@ -16,7 +16,7 @@
     <!-- Content Header (Page header) -->
     <ol class="breadcrumb" style="margin-bottom: 0px">
       <li><a href="${webContextPath!}/starter"><i class="fa fa-dashboard"></i> 首页</a></li>
-      <li><a href="${webContextPath!}/wechatuserinfoadmin"><i class="fa fa-ticket"></i> 影票订单信息管理</a></li>
+      <li><a href="${webContextPath!}/ticketorderinfoadmin"><i class="fa fa-ticket"></i> 影票订单信息管理</a></li>
       <li class="active"><i class="fa fa-list-alt"></i> 影票订单信息详情</li>
     </ol>
     <!-- Main content -->
@@ -37,109 +37,109 @@
               <form id="accountEditForm" method="POST" action="${webContextPath!}/ticketorderinfoadmin/edit/" class="form-horizontal dss-base-form">
                 <div class="form-group"><label class="col-sm-2 control-label">影票订单编号</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getOpenId()!}</#if> </label>
+                    <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getTicketOrderInfoId()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">影院名称</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getNickName()!}</#if> </label>
+                    <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getCinemaName()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">影院位置</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getGender()!}</#if> </label>
+                    <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getCinemaAddress()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">影片名称</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getCity()!}</#if> </label>
+                    <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getMovieName()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">影片开始时间</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getProvince()!}</#if> </label>
+                    <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getMovieTime()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">影片标签</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getAvatarUrl()!}</#if> </label>
+                    <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getMovieLabel()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">观影具体位置</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getUnionId()!}</#if> </label>
+                    <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getCinemaSpecificAddress()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">影片订单号</label>
                   <div class="col-sm-8">
-                      <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getAvatarUrl()!}</#if> </label>
+                      <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getMovieOrderNum()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">用户手机号</label>
                   <div class="col-sm-8">
-                      <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getUnionId()!}</#if> </label>
+                      <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getUserPhoneNum()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">影片流水号</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getUnionId()!}</#if> </label>
+                    <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getMovieSerialNum()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">订单验证码</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getUnionId()!}</#if> </label>
+                    <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getOrderVerificationNum()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">订单总价</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getUnionId()!}</#if> </label>
+                    <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getOrderSumPrice()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">业务版本号</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getVersion()!}</#if> </label>
+                    <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getVersion()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">创建用户</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getCreateUsername()!}</#if> </label>
+                    <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getCreateUsername()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">创建时间</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getCreateTime()!}</#if> </label>
+                    <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getCreateTime()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">最后修改用户</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getModifyUsername()!}</#if> </label>
+                    <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getModifyUsername()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">最后修改时间</label>
                   <div class="col-sm-8">
-                    <label class="form-control"> <#if wechatUserInfo ??> ${wechatUserInfo.getModifyTime()!}</#if> </label>
+                    <label class="form-control"> <#if tcketOrderInfo ??> ${tcketOrderInfo.getModifyTime()!}</#if> </label>
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group">
                   <div class="col-sm-2 col-sm-offset-10">
-                    <a class="btn btn-sm btn-primary" href="${webContextPath!}/wechatuserinfoadmin/">返回</a>
+                    <a class="btn btn-sm btn-primary" href="${webContextPath!}/ticketorderinfoadmin/">返回</a>
                   </div>
                 </div>
               </form>

@@ -1,5 +1,4 @@
 HELP.md
-/target/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
@@ -26,3 +25,7 @@ HELP.md
 /build/
 
 .DS_Store
+
+### Java ###
+*.class
+target

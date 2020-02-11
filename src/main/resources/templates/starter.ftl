@@ -53,6 +53,78 @@ desired effect
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>1</h3>
+
+              <p>微信用户</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-wechat"></i>
+            </div>
+            <a href="${webContextPath!}/wechatuserinfoadmin" class="small-box-footer">
+              了解更多 <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>5</h3>
+
+              <p>电影接口</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file-movie-o"></i>
+            </div>
+            <a href="${webContextPath!}/movieinterface" class="small-box-footer">
+              了解更多 <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>2</h3>
+
+              <p>影院接口</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-film"></i>
+            </div>
+            <a href="${webContextPath!}/cinemainterface" class="small-box-footer">
+              了解更多 <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>18</h3>
+
+              <p>影票订单</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-ticket"></i>
+            </div>
+            <a href="${webContextPath!}/ticketorderinfoadmin" class="small-box-footer">
+              了解更多 <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+      <!-- /.row -->
     </section>
     <!-- /.content -->
   </div>
